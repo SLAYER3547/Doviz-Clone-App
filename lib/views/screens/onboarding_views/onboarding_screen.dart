@@ -15,7 +15,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // Sayfalar için içerik
+
   final List<Widget> _pages = [
     const FirstOnboardingPage(),
     const SecondOnboardingPage(),
@@ -41,28 +41,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
             ),
           ),
-          // "Sonraki" ve "Bitir" düğmeleri
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_currentPage == _pages.length - 1) {
-                  // Son sayfadaysa, ana ekrana yönlendirme yap
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                } else {
-                  // Sonraki sayfaya geç
-                  _pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.ease,
-                  );
-                }
-              },
-              child:
-                 const Text('Devam'),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(width: 10,),
+              TextButton(
+                onPressed: () {
+                  if (_currentPage == _pages.length - 1) {
+                    // Son sayfadaysa, ana ekrana yönlendirme yap
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    );
+                  } else {
+                    // Sonraki sayfaya geç
+                    _pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.ease,
+                    );
+                  }
+                },
+                child:
+                   const Row(
+                     children:  [
+                       Text('Devam',style: TextStyle(color: Color(0xFF1764b2),fontSize: 18,fontWeight: FontWeight.bold),),
+                       SizedBox(width: 7,),
+                       Icon(Icons.arrow_forward,color: Color(0xFF1764b2),),
+                     ],
+                   ),
+                   
+              ),
+            ],
           ),
         ],
       ),

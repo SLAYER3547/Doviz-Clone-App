@@ -13,17 +13,17 @@ class FirstOnboardingPage extends StatefulWidget {
 
 class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
   List<WatchCurrencyList> currencyList = [
-    WatchCurrencyList("assets/images/united_states_flag.png", "Gram Altın",
+    WatchCurrencyList("assets/images/gram_altın.jpeg", "Gram Altın",
         "Gram Altın", true),
     WatchCurrencyList(
         "assets/images/united_states_flag.png", "USD", "Amerikan Doları", true),
     WatchCurrencyList(
-        "assets/images/united_states_flag.png", "EUR", "Euro", true),
+        "assets/images/europe_flag.png", "EUR", "Euro", true),
     WatchCurrencyList(
-        "assets/images/united_states_flag.png", "XU100", "BIST 100", true),
-    WatchCurrencyList("assets/images/united_states_flag.png",
+        "assets/images/bist.png", "XU100", "BIST 100", true),
+    WatchCurrencyList("assets/images/cumhuriyet.jpg",
         "Cumhuriyet Altını", "Cumhuriyet Altını", false),
-    WatchCurrencyList("assets/images/united_states_flag.png", "Ata Altın",
+    WatchCurrencyList("assets/images/ata.png", "Ata Altın",
         "Ata Altın", false),
   ];
 
@@ -55,7 +55,6 @@ class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
               color: Color(0xFF1a202c),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-          
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
@@ -85,7 +84,17 @@ class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
                   )
                 ],
               ),
-
+              const SizedBox(height: 20),
+              Column(
+                children: currencyList.map((currency) {
+                  return CurrencyListContainer(
+                    currencyImage: currency.currencyImage,
+                    currencyName: currency.currencyName,
+                    currencySymbolName: currency.currencySymbolName,
+                    isFavourited: currency.isFavourited,
+                  );
+                }).toList(),
+              ),
             ],
           ),
         ),

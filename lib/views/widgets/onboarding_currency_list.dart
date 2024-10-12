@@ -14,8 +14,8 @@ class CurrencyListContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
-      margin: const EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -55,7 +55,7 @@ class CurrencyListContainer extends StatelessWidget {
           isFavourited ? const Icon(
             Icons.star,
             color: Color(0xFFa36b1b),
-          ): const Icon(Icons.bookmark,color: Color(0xFFa36b1b))
+          ): const Icon(Icons.star_border,color: Color(0xFFa36b1b))
         ],
       ),
     );
