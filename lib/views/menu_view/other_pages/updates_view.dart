@@ -19,6 +19,6 @@ class UpdatesView extends StatelessWidget {
       body: const Center(
         child: Text("Yenilikler",style: TextStyle(color: Colors.white),),
       ),
-    );;
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:doviz_clone_app/models/menu_models/other_menu_pages_model.dart';
 import 'package:doviz_clone_app/models/menu_models/pages_model.dart';
 import 'package:doviz_clone_app/models/menu_models/settings_pages_model.dart';
+import 'package:doviz_clone_app/views/auth_views/login_view.dart';
 import 'package:flutter/material.dart';
 
 class MenuView extends StatefulWidget {
@@ -45,7 +46,9 @@ class _MenuViewState extends State<MenuView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginView()));
+                        },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 10 * 3.7,
                           padding: const EdgeInsets.all(10),
@@ -151,7 +154,8 @@ class _MenuViewState extends State<MenuView> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 18),
                             ),
-                            const Icon(Icons.arrow_forward_ios, color: Colors.white)
+                            const Icon(Icons.arrow_forward_ios,
+                                color: Colors.white)
                           ],
                         ),
                       ),
@@ -207,7 +211,8 @@ class _MenuViewState extends State<MenuView> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 18),
                             ),
-                            const Icon(Icons.arrow_forward_ios, color: Colors.white)
+                            const Icon(Icons.arrow_forward_ios,
+                                color: Colors.white)
                           ],
                         ),
                       ),
@@ -263,7 +268,8 @@ class _MenuViewState extends State<MenuView> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 18),
                             ),
-                            const Icon(Icons.arrow_forward_ios, color: Colors.white)
+                            const Icon(Icons.arrow_forward_ios,
+                                color: Colors.white)
                           ],
                         ),
                       ),
