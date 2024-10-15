@@ -33,44 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     'Değişim Oranına Göre Azalan'
   ];
 
-  List<WatchCurrencyList> currencyList = [
-    WatchCurrencyList("assets/images/gram_altın.jpeg", "Gram Altın",
-        "Gram Altın", true, 2937.94, 1212.2, 70.24),
-    WatchCurrencyList("assets/images/united_states_flag.png", "USD",
-        "Amerikan Doları", true, 34.2812, 6.513, 23.46),
-    WatchCurrencyList("assets/images/europe_flag.png", "EUR", "Euro", true,
-        37.5022, 8.29, 28.39),
-    WatchCurrencyList("assets/images/bist.png", "XU100", "BIST 100", true,
-        8876.22, 545.58, 6.55),
-
-  ];
-
-  List<CryptoList> cryptoList = [
-    CryptoList("TRUMP", "MOG TRUMP", 0.170764, 0.07, 74.42),
-    CryptoList("SIGMA", "Sigma", 0.084608, 0.01, 10.02),
-    CryptoList("BTCP", "Bitcoin Pro", 33.07, 4.11, 14.20),
-    CryptoList("SILLY", "Silly Dragon", 0.02269212, 0.00, 1.66),
-    CryptoList("NETVR", "Netvrk", 0.12449, 0.01, -9.41),
-    CryptoList("SPX", "SPX6900", 0.829085, 0.10, -10.47),
-    CryptoList("RETARDIO", "RETARDIO", 0.166572, -0.02, -11.65),
-    CryptoList(
-        "BITCOIN", "HarryPotterObamaSonic10lnu(ETH)", 0.308778, -0.04, -10.95),
-    CryptoList("APU", "Apu Apustaja", 0.00087959, -0.00, -2.25),
-    CryptoList("SLERF", "Slerf", 0.246344, -0.05, 26.33),
-  ];
-
-  List<ShareList> shareList = [
-    ShareList("SKTAS", "SOKTAS", 4.95, 0.45, 10.00),
-    ShareList("TKFEN", "TEKFEN HOLDING", 63.95, 0.90, 1.91),
-    ShareList("SOKE", "SOKE DEGIRMENCILIK", 13.77, 0.67, 5.11),
-    ShareList("MARKA", "MARKA YATIRIM HOLDING", 51.40, 4.66, 9.97),
-    ShareList("IZFAS", "IZMIR FIRCA", 42.32, 0.24, 0.57),
-    ShareList("ICUGS", "ICU GIRISIM", 26.16, -0.10, -0.38),
-    ShareList("ULUUN", "ULUSOY UN SANAYI", 6.49, 0.21, 3.34),
-    ShareList("SAFKR", "SAFKAR EGE SOGUTMACILIK", 58.95, 0.75, 1.29),
-    ShareList("DURDO", "DURAN DOGAN BASIM", 15.72, -1.20, -7.09),
-    ShareList("TUREX", "TUREX TURIZM TASIMACILIK", 103.90, 1.60, 1.56),
-  ];
+  List<WatchCurrencyList> currencyList = WatchCurrencyList.currencyList;
+  List<CryptoList> cryptoList = CryptoList.cryptoList;
+  List<ShareList> shareList = ShareList.shareList;
 
   @override
   Widget build(BuildContext context) {
