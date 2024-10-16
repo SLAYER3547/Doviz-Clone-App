@@ -2,6 +2,7 @@ import 'package:doviz_clone_app/models/menu_models/other_menu_pages_model.dart';
 import 'package:doviz_clone_app/models/menu_models/pages_model.dart';
 import 'package:doviz_clone_app/models/menu_models/settings_pages_model.dart';
 import 'package:doviz_clone_app/views/auth_views/login_view.dart';
+import 'package:doviz_clone_app/views/auth_views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
 class MenuView extends StatefulWidget {
@@ -47,7 +48,10 @@ class _MenuViewState extends State<MenuView> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginView()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginView()));
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 10 * 3.7,
@@ -66,7 +70,12 @@ class _MenuViewState extends State<MenuView> {
                         width: 30,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUpView()));
+                        },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 10 * 3.7,
                           padding: const EdgeInsets.all(10),

@@ -20,7 +20,7 @@ class PageList {
     PageList(Icons.oil_barrel_outlined, "Akaryakıt",const FuelsView()),
     PageList(Icons.currency_lira, "Halka Arz",const IpoView()),
     PageList(Icons.newspaper, "Haber Akışı",const NewsFeedView()),
-    PageList(Icons.message, "Analizler",const NewsView()),
+    PageList(Icons.message, "Analizler", const NewsView(appBarTitle: "Analizler",)),
     PageList(Icons.article, "Makaleler",const ArticlesView()),
     PageList(Icons.calculate, "Kredi Hesaplama",const CalculateCreditView()),
     PageList(Icons.calendar_today_outlined, "Ekonomik Takvim",const EconomicCalendarView()),

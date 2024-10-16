@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'package:doviz_clone_app/views/auth_views/sign_up_view.dart';
+import 'package:doviz_clone_app/views/widgets/login_options_box.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -44,84 +44,18 @@ class LoginView extends StatelessWidget {
                       fontSize: 28,
                       fontWeight: FontWeight.w600),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(7),
-                  margin: const EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width / 10 * 8.5,
-                  decoration: const BoxDecoration(color: Color(0xFF1a202c)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.network(
+                const LoginOptionsBox(
+                    imagePath:
                         "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png",
-                        width: 50,
-                        height: 50,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        "Google ile giriş yapın",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(7),
-                  margin: const EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width / 10 * 8.5,
-                  decoration: const BoxDecoration(color: Color(0xFF1a202c)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.network(
+                    loginOptionText: "Google ile giriş yapın"),
+                const LoginOptionsBox(
+                    imagePath:
                         "https://seeklogo.com/images/A/apple-logo-E3DBF3AE34-seeklogo.com.png",
-                        width: 40,
-                        height: 40,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        "Apple ile giriş yapın",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(7),
-                  margin: const EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width / 10 * 8.5,
-                  decoration: const BoxDecoration(color: Color(0xFF1a202c)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.email,
-                        color: Color(0xFF134b8b),
-                        size: 35,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "E-Posta ile giriş yapın",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                ),
+                    loginOptionText: "Apple ile giriş yapın"),
+                const LoginOptionsBox(
+                    imagePath:
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPBc6ABF7dC86Cpl5dWd_ZBAbDsQq0Pq85Q&s",
+                    loginOptionText: "E-Posta ile giriş yapın"),
                 const SizedBox(
                   height: 15,
                 ),
@@ -134,7 +68,12 @@ class LoginView extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUpView()));
+                        },
                         child: const Text(
                           "üye olun",
                           style: TextStyle(

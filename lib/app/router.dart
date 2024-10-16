@@ -36,7 +36,7 @@ final router = GoRouter(
         StatefulShellBranch(routes: [
           GoRoute(
             path: AppRoutes.news,
-            builder: (context, state) => const NewsView(),
+            builder: (context, state) =>  const NewsView(),
           )
         ]),
         StatefulShellBranch(routes: [
