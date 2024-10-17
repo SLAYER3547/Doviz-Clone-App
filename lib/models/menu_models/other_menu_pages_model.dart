@@ -1,4 +1,4 @@
-import 'package:doviz_clone_app/views/menu_view/other_pages/communications_view.dart';
+import 'package:doviz_clone_app/views/menu_view/other_pages/communications_view/communications_view.dart';
 import 'package:doviz_clone_app/views/menu_view/other_pages/confidentiality_agreement_view.dart';
 import 'package:doviz_clone_app/views/menu_view/other_pages/disclaimer_view.dart';
 import 'package:doviz_clone_app/views/menu_view/other_pages/updates_view.dart';
