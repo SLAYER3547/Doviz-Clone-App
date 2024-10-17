@@ -19,7 +19,6 @@ class _MenuViewState extends State<MenuView> {
   List<OtherMenuPagesList> otherMenuPagesList =
       OtherMenuPagesList.otherMenuPagesList;
 
-  // Yönlendirmek istediğiniz sayfaları ekleyin.
   void _navigateToPage(BuildContext context, Widget page) {
     Navigator.push(
       context,
@@ -92,7 +91,12 @@ class _MenuViewState extends State<MenuView> {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpView()));
+                    },
                     child: Container(
                       margin: const EdgeInsets.only(top: 10),
                       padding: const EdgeInsets.all(10),
@@ -237,7 +241,6 @@ class _MenuViewState extends State<MenuView> {
                 childCount: settingsPagesList.length,
               ),
             ),
-            // Diğer Menü Listesi
             SliverToBoxAdapter(
               child: Container(
                   margin: const EdgeInsets.only(top: 15, left: 10),
