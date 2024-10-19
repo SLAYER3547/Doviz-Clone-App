@@ -1,7 +1,7 @@
 import 'package:doviz_clone_app/views/app_view.dart';
 import 'package:doviz_clone_app/views/menu_view/menu_view.dart';
 import 'package:doviz_clone_app/views/screens/converter_view/converter_view.dart';
-import 'package:doviz_clone_app/views/screens/home.dart';
+import 'package:doviz_clone_app/views/screens/home_views/home.dart';
 import 'package:doviz_clone_app/views/screens/markets_view/markets_view.dart';
 import 'package:doviz_clone_app/views/screens/news_view/news.view.dart';
 import 'package:flutter/material.dart';

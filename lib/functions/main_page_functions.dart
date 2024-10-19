@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-void showPriceFilterBottomSheet(
-    BuildContext context,
-    String title,
-    List<String> itemList,
-    String selectedItem,
-    Function(String) onSelected,
-    {bool showIcons = false}) { // Add the optional showIcons parameter
+void showPriceFilterBottomSheet(BuildContext context, String title,
+    List<String> itemList, String selectedItem, Function(String) onSelected,
+    {bool showIcons = false}) {
   showModalBottomSheet(
     context: context,
     useRootNavigator: true,
@@ -41,7 +37,8 @@ void showPriceFilterBottomSheet(
                 return ListTile(
                   leading: showIcons
                       ? Icon(
-                          updateOrderIcon(itemList[index]), // Only show icon for sorting menu
+                          updateOrderIcon(itemList[
+                              index]), // Only show icon for sorting menu
                           color: Colors.white,
                         )
                       : null,
@@ -66,8 +63,6 @@ void showPriceFilterBottomSheet(
   );
 }
 
-
-
 String getOrderText(String selectedOrderFilter) {
   if (selectedOrderFilter.contains('Alfabetik')) {
     return 'Alfabetik';
@@ -86,6 +81,10 @@ IconData updateOrderIcon(String selectedOrderFilter) {
     return Icons.trending_up;
   } else if (selectedOrderFilter == 'Değişim Oranına Göre Azalan') {
     return Icons.trending_down;
+  } else if (selectedOrderFilter == 'Değere Göre Artan') {
+    return Icons.arrow_upward;
+  } else if (selectedOrderFilter == 'Değere Göre Azalan') {
+    return Icons.arrow_downward;
   } else {
     return Icons.sort;
   }

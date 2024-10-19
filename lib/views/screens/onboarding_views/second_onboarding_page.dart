@@ -1,4 +1,4 @@
-import 'package:doviz_clone_app/views/screens/home.dart';
+import 'package:doviz_clone_app/views/screens/home_views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
