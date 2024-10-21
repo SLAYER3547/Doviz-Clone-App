@@ -1,6 +1,7 @@
 import 'package:doviz_clone_app/models/crypto_model/crypto_model.dart';
 import 'package:doviz_clone_app/models/share_model/share_model.dart';
 import 'package:doviz_clone_app/views/screens/home_views/rising_crypto_list_of_week.dart';
+import 'package:doviz_clone_app/views/screens/home_views/rising_share_list_of_week.dart';
 import 'package:flutter/material.dart';
 import 'package:doviz_clone_app/models/onboarding_models/watch_currency_list_model.dart';
 import 'package:doviz_clone_app/functions/main_page_functions.dart';
@@ -381,23 +382,31 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SliverToBoxAdapter(
-            child: Container(
-              margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-              child: const Row(
-                children: [
-                  Text(
-                    "Haftanın Yükselen Hisseleri",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 16,
-                  ),
-                ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RisingShareListOfWeek()));
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
+                child: const Row(
+                  children: [
+                    Text(
+                      "Haftanın Yükselen Hisseleri",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,17 +1,16 @@
-import 'package:doviz_clone_app/models/crypto_model/crypto_model.dart';
-import 'package:doviz_clone_app/views/screens/home_views/crypto_detail_view.dart';
-import 'package:flutter/material.dart';
 import 'package:doviz_clone_app/functions/main_page_functions.dart';
+import 'package:doviz_clone_app/models/share_model/share_model.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class RisingCryptoListOfWeek extends StatefulWidget {
-  const RisingCryptoListOfWeek({super.key});
+class RisingShareListOfWeek extends StatefulWidget {
+  const RisingShareListOfWeek({super.key});
 
   @override
-  State<RisingCryptoListOfWeek> createState() => _RisingCryptoListOfWeekState();
+  State<RisingShareListOfWeek> createState() => _RisingShareListOfWeekState();
 }
 
-class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
+class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
   String selectedOrderFilter = 'Varsayılan';
   String selectedPriceTimeStampFilter = 'Günlük';
   final List<String> orderFilterList = [
@@ -28,7 +27,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
     'Haftalık',
     'Aylık',
   ];
-  List<CryptoList> cryptoList = CryptoList.cryptoList;
+  List<ShareList> shareList = ShareList.shareList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +45,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
             )),
         title: const Center(
             child: Text(
-          "Haftanın Yükselen Kripto Paraları",
+          "Haftanın Yükselen Hisseleri",
           style: TextStyle(
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         )),
@@ -150,92 +149,57 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
               (context, index) {
                 return Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CryptoDetailView(
-                                    cryptoImage: cryptoList[index].cryptoImage,
-                                    cryptoSymbolName:
-                                        cryptoList[index].cryptoSymbolName,
-                                    cryptoName: cryptoList[index].cryptoName,
-                                    cryptoPrice: cryptoList[index].price,
-                                    cryptoValueForTl:
-                                        cryptoList[index].cryptoValueForTl,
-                                    changePercentageOfWeek: cryptoList[index]
-                                        .changePercentageOfWeek,
-                                    changePercentageOfMonth: cryptoList[index]
-                                        .changePercentageOfMonth,
-                                    changePercentageOfYear: cryptoList[index]
-                                        .changePercentageOfYear,
-                                    fundSize: cryptoList[index].fundSize,
-                                    maximumValueOf52Week:
-                                        cryptoList[index].maximumValueOf52Week,
-                                    marketValue: cryptoList[index].marketValue,
-                                    changedPercentage: cryptoList[index]
-                                        .changedValuePercentage,
-                                    changedValue:
-                                        cryptoList[index].changedValue)));
-                      },
-                      child: ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  cryptoList[index].cryptoSymbolName,
+                    ListTile(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                shareList[index].shareSymbolName,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width/10*5,
+                                child: Text(
+                                  shareList[index].shareName,
                                   style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width /
-                                      10 *
-                                      5,
-                                  child: Text(
-                                    cryptoList[index].cryptoName,
-                                    style: const TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "\$${shareList[index].price.toString()}",
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "\$${shareList[index].changedValue.toString()}",
+                                    style: const TextStyle(color: Colors.green),
                                   ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "\$${cryptoList[index].price.toString()}",
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "\$${cryptoList[index].changedValue.toString()}",
-                                      style:
-                                          const TextStyle(color: Colors.green),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "%${cryptoList[index].changedValuePercentage.toString()}",
-                                      style:
-                                          const TextStyle(color: Colors.green),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                                  const SizedBox(width: 10,),
+                                  Text(
+                                    "%${shareList[index].changedValuePercentage.toString()}",
+                                    style: const TextStyle(color: Colors.green),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                     const Divider(
@@ -248,7 +212,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                   ],
                 );
               },
-              childCount: cryptoList.length,
+              childCount: shareList.length,
             ),
           ),
         ],
