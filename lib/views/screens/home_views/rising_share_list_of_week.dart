@@ -1,5 +1,6 @@
 import 'package:doviz_clone_app/functions/main_page_functions.dart';
 import 'package:doviz_clone_app/models/share_model/share_model.dart';
+import 'package:doviz_clone_app/views/screens/home_views/share_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -149,57 +150,95 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
               (context, index) {
                 return Column(
                   children: [
-                    ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                shareList[index].shareSymbolName,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width/10*5,
-                                child: Text(
-                                  shareList[index].shareName,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShareDetailView(
+                                    shareLogo: shareList[index].shareLogo,
+                                    shareSymbolName:
+                                        shareList[index].shareSymbolName,
+                                    shareName: shareList[index].shareName,
+                                    price: shareList[index].price,
+                                    changedValue: shareList[index].changedValue,
+                                    changedValuePercentage:
+                                        shareList[index].changedValuePercentage,
+                                    lowValueOfDay:
+                                        shareList[index].lowValueOfDay,
+                                    highValueOfDay:
+                                        shareList[index].highValueOfDay,
+                                    changedPercentageOfWeek: shareList[index]
+                                        .changedPercentageOfWeek,
+                                    changedPercentageOfMonth: shareList[index]
+                                        .changedPercentageOfMonth,
+                                    changedPercentageOfYear: shareList[index]
+                                        .changedPercentageOfYear,
+                                    peakValue: shareList[index].peakValue,
+                                    baseValue: shareList[index].baseValue,
+                                    fundSizeTl: shareList[index].fundSizeTl,
+                                    fundSizeLot: shareList[index].fundSizeLot,
+                                    capitalReceipts:
+                                        shareList[index].capitalReceipts)));
+                      },
+                      child: ListTile(
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  shareList[index].shareSymbolName,
                                   style: const TextStyle(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500),
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "\$${shareList[index].price.toString()}",
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "\$${shareList[index].changedValue.toString()}",
-                                    style: const TextStyle(color: Colors.green),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width /
+                                      10 *
+                                      5,
+                                  child: Text(
+                                    shareList[index].shareName,
+                                    style: const TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500),
                                   ),
-                                  const SizedBox(width: 10,),
-                                  Text(
-                                    "%${shareList[index].changedValuePercentage.toString()}",
-                                    style: const TextStyle(color: Colors.green),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "\$${shareList[index].price.toString()}",
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "\$${shareList[index].changedValue.toString()}",
+                                      style:
+                                          const TextStyle(color: Colors.green),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "%${shareList[index].changedValuePercentage.toString()}",
+                                      style:
+                                          const TextStyle(color: Colors.green),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const Divider(

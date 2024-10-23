@@ -1,50 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class CryptoDetailView extends StatefulWidget {
-  final String cryptoImage;
-  final String cryptoSymbolName;
-  final String cryptoName;
-  final double cryptoPrice;
-  final double cryptoValueForTl;
-  final double changePercentageOfWeek;
-  final double changePercentageOfMonth;
-  final double changePercentageOfYear;
-  final double fundSize;
-  final double maximumValueOf52Week;
-  final double marketValue;
-  final double changedPercentage;
+class ShareDetailView extends StatefulWidget {
+  final String shareLogo;
+  final String shareSymbolName;
+  final String shareName;
+  final double price;
   final double changedValue;
+  final double changedValuePercentage;
+  final double lowValueOfDay;
+  final double highValueOfDay;
+  final double changedPercentageOfWeek;
+  final double changedPercentageOfMonth;
+  final double changedPercentageOfYear;
+  final double peakValue;
+  final double baseValue;
+  final double fundSizeTl;
+  final double fundSizeLot;
+  final double capitalReceipts;
 
-  const CryptoDetailView({
+  const ShareDetailView({
     super.key,
-    required this.cryptoImage,
-    required this.cryptoSymbolName,
-    required this.cryptoName,
-    required this.cryptoPrice,
-    required this.cryptoValueForTl,
-    required this.changePercentageOfWeek,
-    required this.changePercentageOfMonth,
-    required this.changePercentageOfYear,
-    required this.fundSize,
-    required this.maximumValueOf52Week,
-    required this.marketValue,
-    required this.changedPercentage,
+    required this.shareLogo,
+    required this.shareSymbolName,
+    required this.shareName,
+    required this.price,
     required this.changedValue,
+    required this.changedValuePercentage,
+    required this.lowValueOfDay,
+    required this.highValueOfDay,
+    required this.changedPercentageOfWeek,
+    required this.changedPercentageOfMonth,
+    required this.changedPercentageOfYear,
+    required this.peakValue,
+    required this.baseValue,
+    required this.fundSizeTl,
+    required this.fundSizeLot,
+    required this.capitalReceipts,
   });
 
   @override
-  State<CryptoDetailView> createState() => _CryptoDetailViewState();
+  State<ShareDetailView> createState() => _ShareDetailViewState();
 }
 
-class _CryptoDetailViewState extends State<CryptoDetailView> {
-  List<_CryptoValueGraphicData> data = [
-    _CryptoValueGraphicData('07.54', 0.08),
-    _CryptoValueGraphicData('12.03', 0.11),
-    _CryptoValueGraphicData('16.14', 0.14),
-    _CryptoValueGraphicData('20.30', 0.16),
-    _CryptoValueGraphicData('01.12', 0.18),
-    _CryptoValueGraphicData('05.32', 0.18),
+class _ShareDetailViewState extends State<ShareDetailView> {
+  List<_ShareValueGraphicData> data = [
+    _ShareValueGraphicData('09.55', 52.5),
+    _ShareValueGraphicData('10.00', 51.0),
+    _ShareValueGraphicData('10.02', 52),
   ];
   String selectedRange = "1G";
 
@@ -99,7 +102,7 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(50),
                             child: Image.network(
-                              widget.cryptoImage,
+                              widget.shareLogo,
                               width: 40,
                               height: 40,
                               fit: BoxFit.cover,
@@ -110,7 +113,7 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                           ),
                           Expanded(
                             child: Text(
-                              "${widget.cryptoSymbolName.toUpperCase()} - ${widget.cryptoName.toUpperCase()}",
+                              "${widget.shareSymbolName.toUpperCase()} - ${widget.shareName.toUpperCase()}",
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -133,11 +136,11 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Son (07:43)",
+                              "Son (10.02)",
                               style: TextStyle(color: Color(0xFFa5b1bf)),
                             ),
                             Text(
-                              "\$${widget.cryptoPrice}",
+                              "\$${widget.price}",
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,
@@ -146,7 +149,7 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                             Row(
                               children: [
                                 Text(
-                                  "%${widget.changedPercentage.toString()} ",
+                                  "%${widget.changedValuePercentage.toString()} ",
                                   style: const TextStyle(
                                       color: Colors.green,
                                       fontWeight: FontWeight.w700),
@@ -162,16 +165,16 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                         ),
                         Column(
                           children: [
-                            Text(
-                              "${widget.cryptoSymbolName}/TRY",
-                              style: const TextStyle(
+                            const Text(
+                              "Günlük Aralık",
+                              style: TextStyle(
                                   color: Color.fromARGB(255, 228, 233, 240)),
                             ),
                             const SizedBox(
                               height: 8,
                             ),
                             Text(
-                              "₺${widget.cryptoValueForTl}",
+                              "₺${widget.baseValue} - ${widget.peakValue}",
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -240,38 +243,36 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                   tooltipBehavior: TooltipBehavior(enable: true),
                   trackballBehavior: TrackballBehavior(
                     enable: true,
-                    lineType: TrackballLineType.vertical, 
-                    activationMode: ActivationMode.singleTap, 
+                    lineType: TrackballLineType.vertical,
+                    activationMode: ActivationMode.singleTap,
                     markerSettings: const TrackballMarkerSettings(
-                      markerVisibility: TrackballVisibilityMode
-                          .visible, 
+                      markerVisibility: TrackballVisibilityMode.visible,
                       shape: DataMarkerType.circle,
                       width: 10,
                       height: 10,
                       borderWidth: 2,
-                      borderColor: Colors.green,
+                      borderColor: Colors.red,
                       color: Colors.white,
                     ),
                     tooltipSettings: const InteractiveTooltip(
                       enable: true,
-                      format: 'point.y', 
-                      borderColor: Colors.green,
+                      format: 'point.y',
+                      borderColor: Colors.red,
                       borderWidth: 2,
                       textStyle: TextStyle(color: Colors.white),
-                      color: Colors.green,
+                      color: Colors.red,
                     ),
                   ),
-                  series: <CartesianSeries<_CryptoValueGraphicData, String>>[
-                    AreaSeries<_CryptoValueGraphicData, String>(
+                  series: <CartesianSeries<_ShareValueGraphicData, String>>[
+                    AreaSeries<_ShareValueGraphicData, String>(
                       dataSource: data,
-                      xValueMapper: (_CryptoValueGraphicData sales, _) =>
+                      xValueMapper: (_ShareValueGraphicData sales, _) =>
                           sales.time,
-                      yValueMapper: (_CryptoValueGraphicData sales, _) =>
-                          sales.cryptoValue,
+                      yValueMapper: (_ShareValueGraphicData sales, _) =>
+                          sales.shareValue,
                       name: 'Value',
-                      color:
-                          const Color(0xFF0B2315),
-                      borderColor: Colors.green,
+                      color: const Color(0xFF1e0e11),
+                      borderColor: Colors.red,
                       borderWidth: 2,
                       dataLabelSettings:
                           const DataLabelSettings(isVisible: false),
@@ -283,71 +284,89 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                 padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
+                          "Günlük Aralık",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
                           "Haftalık Değişim Oranı",
                           style: TextStyle(color: Colors.white),
                         ),
-                        const Text(
+                        Text(
                           "Aylık Değişim Oranı",
                           style: TextStyle(color: Colors.white),
                         ),
-                        const Text(
+                        Text(
                           "Yıllık Değişim Oranı",
                           style: TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "${widget.cryptoSymbolName.toString()}/TRY",
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        const Text(
-                          "Hacim",
+                          "Tavan",
                           style: TextStyle(color: Colors.white),
                         ),
-                        const Text(
-                          "52 Haftanın En Yüksek Değeri",
+                        Text(
+                          "Taban",
                           style: TextStyle(color: Colors.white),
                         ),
-                        const Text(
-                          "Piyasa Değeri",
+                        Text(
+                          "Hacim (Tl)",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          "Hacim (Lot)",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          "Ödenmiş Sermaye",
                           style: TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
-                    const SizedBox(width: 25,),
+                    const SizedBox(
+                      width: 25,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "%${widget.changePercentageOfWeek.toString()}",
+                          "${widget.baseValue} - ${widget.peakValue}",
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          "%${widget.changedPercentageOfWeek.toString()}",
                           style: const TextStyle(color: Colors.green),
                         ),
                         Text(
-                          "%${widget.changePercentageOfMonth.toString()}",
+                          "%${widget.changedPercentageOfMonth.toString()}",
                           style: const TextStyle(color: Colors.orange),
                         ),
                         Text(
-                          "%${widget.changePercentageOfYear.toString()}",
+                          "%${widget.changedPercentageOfYear.toString()}",
                           style: const TextStyle(color: Colors.orange),
                         ),
                         Text(
-                          "₺${widget.cryptoValueForTl.toString()}",
+                          "₺${widget.peakValue.toString()}",
                           style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "\$${widget.fundSize.toString()}",
+                          "₺${widget.baseValue.toString()}",
                           style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "\$${widget.maximumValueOf52Week.toString()}",
+                          "₺${widget.fundSizeTl.toString()}",
                           style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "\$${widget.marketValue.toString()}",
+                          widget.fundSizeLot.toString(),
                           style: const TextStyle(color: Colors.white),
-                        )
+                        ),
+                        Text(
+                          "₺${widget.capitalReceipts.toString()}",
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                   ],
@@ -361,9 +380,9 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
   }
 }
 
-class _CryptoValueGraphicData {
-  _CryptoValueGraphicData(this.time, this.cryptoValue);
+class _ShareValueGraphicData {
+  _ShareValueGraphicData(this.time, this.shareValue);
 
   final String time;
-  final double cryptoValue;
+  final double shareValue;
 }

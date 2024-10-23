@@ -1,5 +1,6 @@
 import 'package:doviz_clone_app/models/crypto_model/crypto_model.dart';
 import 'package:doviz_clone_app/models/share_model/share_model.dart';
+import 'package:doviz_clone_app/views/auth_views/sign_up_view.dart';
 import 'package:doviz_clone_app/views/screens/home_views/rising_crypto_list_of_week.dart';
 import 'package:doviz_clone_app/views/screens/home_views/rising_share_list_of_week.dart';
 import 'package:flutter/material.dart';
@@ -50,24 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 80,
           height: 80,
         ),
-        actions: const [
+        actions: [
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.search,
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
-              Icon(
-                Icons.wallet,
-                color: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpView()));
+                },
+                child: const Icon(
+                  Icons.wallet,
+                  color: Colors.white,
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
-              Icon(
+              const Icon(
                 Icons.tune_rounded,
                 color: Colors.white,
               ),
