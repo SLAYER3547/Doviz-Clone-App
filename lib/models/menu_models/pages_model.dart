@@ -2,7 +2,7 @@ import 'package:doviz_clone_app/views/menu_view/pages/add_alarms_view.dart';
 import 'package:doviz_clone_app/views/menu_view/pages/articles_view.dart';
 import 'package:doviz_clone_app/views/menu_view/pages/calculate_credit_view.dart';
 import 'package:doviz_clone_app/views/menu_view/pages/economic_calendar_view.dart';
-import 'package:doviz_clone_app/views/menu_view/pages/fuels_view.dart';
+import 'package:doviz_clone_app/views/menu_view/pages/fuel_views/fuels_view.dart';
 import 'package:doviz_clone_app/views/menu_view/pages/ipo_view.dart';
 import 'package:doviz_clone_app/views/menu_view/pages/news_feed_view.dart';
 import 'package:doviz_clone_app/views/screens/news_view/news.view.dart';

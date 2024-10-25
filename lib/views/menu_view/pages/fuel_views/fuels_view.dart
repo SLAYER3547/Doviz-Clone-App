@@ -1,5 +1,6 @@
 import 'package:doviz_clone_app/models/fuel_model/fuel_seller_model.dart';
 import 'package:doviz_clone_app/models/news_model/news.model.dart';
+import 'package:doviz_clone_app/views/menu_view/pages/fuel_views/all_fuel_news.dart';
 import 'package:doviz_clone_app/views/screens/news_view/news_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -1379,26 +1380,34 @@ class _FuelsViewState extends State<FuelsView> {
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  const Text(
-                    "Akaryakıt Fiyatları Haberleri",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                        size: 16,
-                      ))
-                ],
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AllFuelNews()));
+                },
+                child: Row(
+                  children: [
+                    const Text(
+                      "Akaryakıt Fiyatları Haberleri",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                        onTap: () {},
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 16,
+                        ))
+                  ],
+                ),
               ),
             ),
           ),
@@ -1416,7 +1425,8 @@ class _FuelsViewState extends State<FuelsView> {
                               builder: (context) => NewsDetailPage(
                                 newsList: fuelNews, // Pass all news
                                 initialIndex: index, // Pass the selected index
-                                selectedCategory: "Emtia", // Pass the category of the selected news
+                                selectedCategory:
+                                    "Emtia", // Pass the category of the selected news
                               ),
                             ),
                           );
@@ -1473,7 +1483,7 @@ class _FuelsViewState extends State<FuelsView> {
                   ],
                 );
               },
-              childCount: fuelSellerList.length,
+              childCount: 7,
             ),
           ),
         ],
