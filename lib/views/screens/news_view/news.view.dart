@@ -31,7 +31,7 @@ class _NewsViewState extends State<NewsView> {
 
   List<News> getFilteredNews(int categoryIndex) {
     if (categoryIndex == 0) {
-      return newsList; // Return all news for 'Tümü'
+      return newsList;
     }
     return newsList
         .where((news) => news.category == categories[categoryIndex])

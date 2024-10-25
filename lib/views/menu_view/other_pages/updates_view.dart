@@ -9,16 +9,21 @@ class UpdatesView extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Row(
+        title: Row(
           children: [
-            Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 25,
             ),
-            Text(
+            const Text(
               'Yenilikler',
               style: TextStyle(color: Colors.white),
             ),

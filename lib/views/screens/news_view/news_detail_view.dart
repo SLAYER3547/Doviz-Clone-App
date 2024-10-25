@@ -37,13 +37,12 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
 
   List<Widget> _buildPageIndicators() {
     int totalNews = filteredNewsList.length;
-    int maxDots = 5; // Total number of dots
+    int maxDots = 5;
 
     List<Widget> indicators = [];
-    int middleIndex = maxDots ~/ 2; // Middle of the dots (centered)
+    int middleIndex = maxDots ~/ 2;
 
     if (totalNews > 0) {
-      // Calculate the visible range of dots (centered around the currentIndex)
       int startIndex =
           (currentIndex - middleIndex).clamp(0, totalNews - maxDots);
       int endIndex = (startIndex + maxDots - 1).clamp(0, totalNews - 1);
@@ -123,14 +122,17 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width),
                     Positioned(
-                      bottom: 8,
+                      bottom: 18,
                       left: 16,
-                      child: Text(
-                        news.title,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width/10*8,
+                        child: Text(
+                          news.title,
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
