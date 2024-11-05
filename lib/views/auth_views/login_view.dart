@@ -22,9 +22,9 @@ class LoginView extends StatelessWidget {
                   Icons.close,
                   color: Colors.white,
                   size: 30,
-                )),
+                ),),
           )
-        ],
+        ,],
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -33,29 +33,29 @@ class LoginView extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/images/app_logo_3.png",
+                  'assets/images/app_logo_3.png',
                   width: 150,
                   height: 100,
                 ),
                 const Text(
-                  "Giriş Yapın",
+                  'Giriş Yapın',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w600,),
                 ),
                 const LoginOptionsBox(
                     imagePath:
-                        "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png",
-                    loginOptionText: "Google ile giriş yapın"),
+                        'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png',
+                    loginOptionText: 'Google ile giriş yapın',),
                 const LoginOptionsBox(
                     imagePath:
-                        "https://seeklogo.com/images/A/apple-logo-E3DBF3AE34-seeklogo.com.png",
-                    loginOptionText: "Apple ile giriş yapın"),
+                        'https://seeklogo.com/images/A/apple-logo-E3DBF3AE34-seeklogo.com.png',
+                    loginOptionText: 'Apple ile giriş yapın',),
                 const LoginOptionsBox(
                     imagePath:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPBc6ABF7dC86Cpl5dWd_ZBAbDsQq0Pq85Q&s",
-                    loginOptionText: "E-Posta ile giriş yapın"),
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPBc6ABF7dC86Cpl5dWd_ZBAbDsQq0Pq85Q&s',
+                    loginOptionText: 'E-Posta ile giriş yapın',),
                 const SizedBox(
                   height: 15,
                 ),
@@ -63,27 +63,27 @@ class LoginView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Hesabınız yok mu?",
+                      'Hesabınız yok mu?',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold,),
                     ),
                     TextButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUpView()));
+                                  builder: (context) => const SignUpView(),),);
                         },
                         child: const Text(
-                          "üye olun",
+                          'üye olun',
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               decorationColor: Color(0xFF185fb9),
                               decorationStyle: TextDecorationStyle.solid,
-                              decorationThickness: 3.0,
+                              decorationThickness: 3,
                               color: Color(0xFF185fb9),
-                              fontWeight: FontWeight.bold),
-                        ))
+                              fontWeight: FontWeight.bold,),
+                        ),),
                   ],
                 ),
               ],
@@ -97,53 +97,53 @@ class LoginView extends StatelessWidget {
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "Kullanıcı Sözleşmesi",
+                        'Kullanıcı Sözleşmesi',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Color(0xFF185fb9),
                             decorationStyle: TextDecorationStyle.solid,
-                            decorationThickness: 3.0,
+                            decorationThickness: 3,
                             color: Color(0xFF185fb9),
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      )),
-                  const Text("ve",
-                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                            fontSize: 16,),
+                      ),),
+                  const Text('ve',
+                      style: TextStyle(color: Colors.white, fontSize: 16),),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "Gizlilik Şartları",
+                        'Gizlilik Şartları',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Color(0xFF185fb9),
                             decorationStyle: TextDecorationStyle.solid,
-                            decorationThickness: 3.0,
+                            decorationThickness: 3,
                             color: Color(0xFF185fb9),
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      )),
+                            fontSize: 16,),
+                      ),),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Sorun yaşıyorsanız",
+                    'Sorun yaşıyorsanız',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold,),
                   ),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "bize ulaşın!",
+                        'bize ulaşın!',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Color(0xFF185fb9),
                             decorationStyle: TextDecorationStyle.solid,
-                            decorationThickness: 3.0,
+                            decorationThickness: 3,
                             color: Color(0xFF185fb9),
-                            fontWeight: FontWeight.bold),
-                      ))
+                            fontWeight: FontWeight.bold,),
+                      ),),
                 ],
               ),
             ],

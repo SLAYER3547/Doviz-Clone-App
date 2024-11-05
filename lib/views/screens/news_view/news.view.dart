@@ -3,8 +3,8 @@ import 'package:doviz_clone_app/views/screens/news_view/news_detail_view.dart';
 import 'package:flutter/material.dart';
 
 class NewsView extends StatefulWidget {
-  final String? appBarTitle;
   const NewsView({super.key, this.appBarTitle});
+  final String? appBarTitle;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -24,7 +24,7 @@ class _NewsViewState extends State<NewsView> {
     'Borsa',
     'Altın',
     'Kripto Para',
-    'Emtia'
+    'Emtia',
   ];
 
   List<News> newsList = News.newsList;
@@ -47,7 +47,7 @@ class _NewsViewState extends State<NewsView> {
         backgroundColor: Colors.black,
         title: widget.appBarTitle == null
             ? const Text(
-                "Haberler",
+                'Haberler',
                 style: TextStyle(color: Colors.white),
               )
             : Row(
@@ -59,7 +59,7 @@ class _NewsViewState extends State<NewsView> {
                       child: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
-                      )),
+                      ),),
                   const SizedBox(width: 25,),    
                   Text(
                     widget.appBarTitle!,
@@ -147,14 +147,14 @@ class _NewsViewState extends State<NewsView> {
   void scrollToCategory(int index) {
     // Check if the selected category key exists and get its position
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final RenderBox? categoryBox =
+      final categoryBox =
           _categoryKey.currentContext?.findRenderObject() as RenderBox?;
       if (categoryBox != null) {
-        double categoryPosition = categoryBox.localToGlobal(Offset.zero).dx;
-        double screenWidth = MediaQuery.of(context).size.width;
+        final categoryPosition = categoryBox.localToGlobal(Offset.zero).dx;
+        final screenWidth = MediaQuery.of(context).size.width;
 
         // Scroll so that the selected category is centered
-        double scrollPosition =
+        final scrollPosition =
             categoryPosition - (screenWidth / 2) + (categoryBox.size.width / 2);
         _scrollController.animateTo(
           scrollPosition.clamp(0.0, _scrollController.position.maxScrollExtent),
@@ -166,11 +166,11 @@ class _NewsViewState extends State<NewsView> {
   }
 
   Widget buildNewsList(int categoryIndex) {
-    List<News> filteredNews = getFilteredNews(categoryIndex);
+    final filteredNews = getFilteredNews(categoryIndex);
     return ListView.builder(
       itemCount: filteredNews.length,
       itemBuilder: (context, index) {
-        News news = filteredNews[index];
+        final news = filteredNews[index];
         return ListTile(
           trailing: ClipRRect(
             borderRadius: BorderRadius.circular(14),
@@ -185,7 +185,7 @@ class _NewsViewState extends State<NewsView> {
               style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontSize: 18)),
+                  fontSize: 18,),),
           subtitle: Row(
             children: [
               Text(

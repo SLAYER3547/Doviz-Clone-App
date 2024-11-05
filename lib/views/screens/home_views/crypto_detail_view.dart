@@ -2,6 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CryptoDetailView extends StatefulWidget {
+  const CryptoDetailView({
+    required this.cryptoImage,
+    required this.cryptoSymbolName,
+    required this.cryptoName,
+    required this.cryptoPrice,
+    required this.cryptoValueForTl,
+    required this.changePercentageOfWeek,
+    required this.changePercentageOfMonth,
+    required this.changePercentageOfYear,
+    required this.fundSize,
+    required this.maximumValueOf52Week,
+    required this.marketValue,
+    required this.changedPercentage,
+    required this.changedValue,
+    super.key,
+  });
   final String cryptoImage;
   final String cryptoSymbolName;
   final String cryptoName;
@@ -16,23 +32,6 @@ class CryptoDetailView extends StatefulWidget {
   final double changedPercentage;
   final double changedValue;
 
-  const CryptoDetailView({
-    super.key,
-    required this.cryptoImage,
-    required this.cryptoSymbolName,
-    required this.cryptoName,
-    required this.cryptoPrice,
-    required this.cryptoValueForTl,
-    required this.changePercentageOfWeek,
-    required this.changePercentageOfMonth,
-    required this.changePercentageOfYear,
-    required this.fundSize,
-    required this.maximumValueOf52Week,
-    required this.marketValue,
-    required this.changedPercentage,
-    required this.changedValue,
-  });
-
   @override
   State<CryptoDetailView> createState() => _CryptoDetailViewState();
 }
@@ -46,7 +45,7 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
     _CryptoValueGraphicData('01.12', 0.18),
     _CryptoValueGraphicData('05.32', 0.18),
   ];
-  String selectedRange = "1G";
+  String selectedRange = '1G';
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +54,15 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 22,
-            )),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 22,
+          ),
+        ),
         actions: const [
           Icon(
             Icons.notifications_none,
@@ -76,7 +76,7 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
             Icons.star,
             color: Color(0xFFfe9e12),
             size: 30,
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -86,8 +86,9 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
               Container(
                 width: MediaQuery.of(context).size.width / 10 * 9,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF1a202c),
-                    borderRadius: BorderRadius.circular(7)),
+                  color: const Color(0xFF1a202c),
+                  borderRadius: BorderRadius.circular(7),
+                ),
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,11 +111,12 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                           ),
                           Expanded(
                             child: Text(
-                              "${widget.cryptoSymbolName.toUpperCase()} - ${widget.cryptoName.toUpperCase()}",
+                              '${widget.cryptoSymbolName.toUpperCase()} - ${widget.cryptoName.toUpperCase()}',
                               style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             ),
@@ -133,54 +135,58 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Son (07:43)",
+                              'Son (07:43)',
                               style: TextStyle(color: Color(0xFFa5b1bf)),
                             ),
                             Text(
-                              "\$${widget.cryptoPrice}",
+                              '\$${widget.cryptoPrice}',
                               style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Row(
                               children: [
                                 Text(
-                                  "%${widget.changedPercentage.toString()} ",
+                                  '%${widget.changedPercentage} ',
                                   style: const TextStyle(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.w700),
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                                 Text(
-                                  "(\$${widget.changedValue})",
+                                  '(\$${widget.changedValue})',
                                   style:
                                       const TextStyle(color: Color(0xFFa5b1bf)),
-                                )
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                         Column(
                           children: [
                             Text(
-                              "${widget.cryptoSymbolName}/TRY",
+                              '${widget.cryptoSymbolName}/TRY',
                               style: const TextStyle(
-                                  color: Color.fromARGB(255, 228, 233, 240)),
+                                color: Color.fromARGB(255, 228, 233, 240),
+                              ),
                             ),
                             const SizedBox(
                               height: 8,
                             ),
                             Text(
-                              "₺${widget.cryptoValueForTl}",
+                              '₺${widget.cryptoValueForTl}',
                               style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -191,7 +197,7 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children:
-                      ["1G", "1H", "1A", "3A", "6A", "1Y", "Tümü"].map((range) {
+                      ['1G', '1H', '1A', '3A', '6A', '1Y', 'Tümü'].map((range) {
                     return GestureDetector(
                       onTap: () {
                         setState(() {
@@ -200,7 +206,9 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
+                          vertical: 10,
+                          horizontal: 20,
+                        ),
                         margin: const EdgeInsets.only(left: 10, right: 10),
                         decoration: BoxDecoration(
                           color: selectedRange == range
@@ -232,7 +240,6 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                   primaryYAxis: const NumericAxis(
                     majorGridLines: MajorGridLines(width: 0),
                     majorTickLines: MajorTickLines(width: 0),
-                    borderWidth: 0,
                     axisLine: AxisLine(width: 0),
                     labelStyle: TextStyle(color: Color(0xFF3a3a3a)),
                   ),
@@ -240,21 +247,16 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                   tooltipBehavior: TooltipBehavior(enable: true),
                   trackballBehavior: TrackballBehavior(
                     enable: true,
-                    lineType: TrackballLineType.vertical, 
-                    activationMode: ActivationMode.singleTap, 
+                    activationMode: ActivationMode.singleTap,
                     markerSettings: const TrackballMarkerSettings(
-                      markerVisibility: TrackballVisibilityMode
-                          .visible, 
-                      shape: DataMarkerType.circle,
+                      markerVisibility: TrackballVisibilityMode.visible,
                       width: 10,
                       height: 10,
-                      borderWidth: 2,
                       borderColor: Colors.green,
                       color: Colors.white,
                     ),
                     tooltipSettings: const InteractiveTooltip(
-                      enable: true,
-                      format: 'point.y', 
+                      format: 'point.y',
                       borderColor: Colors.green,
                       borderWidth: 2,
                       textStyle: TextStyle(color: Colors.white),
@@ -269,12 +271,8 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                       yValueMapper: (_CryptoValueGraphicData sales, _) =>
                           sales.cryptoValue,
                       name: 'Value',
-                      color:
-                          const Color(0xFF0B2315),
+                      color: const Color(0xFF0B2315),
                       borderColor: Colors.green,
-                      borderWidth: 2,
-                      dataLabelSettings:
-                          const DataLabelSettings(isVisible: false),
                     ),
                   ],
                 ),
@@ -287,72 +285,74 @@ class _CryptoDetailViewState extends State<CryptoDetailView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Haftalık Değişim Oranı",
+                          'Haftalık Değişim Oranı',
                           style: TextStyle(color: Colors.white),
                         ),
                         const Text(
-                          "Aylık Değişim Oranı",
+                          'Aylık Değişim Oranı',
                           style: TextStyle(color: Colors.white),
                         ),
                         const Text(
-                          "Yıllık Değişim Oranı",
+                          'Yıllık Değişim Oranı',
                           style: TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "${widget.cryptoSymbolName.toString()}/TRY",
+                          '${widget.cryptoSymbolName}/TRY',
                           style: const TextStyle(color: Colors.white),
                         ),
                         const Text(
-                          "Hacim",
+                          'Hacim',
                           style: TextStyle(color: Colors.white),
                         ),
                         const Text(
-                          "52 Haftanın En Yüksek Değeri",
+                          '52 Haftanın En Yüksek Değeri',
                           style: TextStyle(color: Colors.white),
                         ),
                         const Text(
-                          "Piyasa Değeri",
+                          'Piyasa Değeri',
                           style: TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
-                    const SizedBox(width: 25,),
+                    const SizedBox(
+                      width: 25,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "%${widget.changePercentageOfWeek.toString()}",
+                          '%${widget.changePercentageOfWeek}',
                           style: const TextStyle(color: Colors.green),
                         ),
                         Text(
-                          "%${widget.changePercentageOfMonth.toString()}",
+                          '%${widget.changePercentageOfMonth}',
                           style: const TextStyle(color: Colors.orange),
                         ),
                         Text(
-                          "%${widget.changePercentageOfYear.toString()}",
+                          '%${widget.changePercentageOfYear}',
                           style: const TextStyle(color: Colors.orange),
                         ),
                         Text(
-                          "₺${widget.cryptoValueForTl.toString()}",
+                          '₺${widget.cryptoValueForTl}',
                           style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "\$${widget.fundSize.toString()}",
+                          '\$${widget.fundSize}',
                           style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "\$${widget.maximumValueOf52Week.toString()}",
+                          '\$${widget.maximumValueOf52Week}',
                           style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "\$${widget.marketValue.toString()}",
+                          '\$${widget.marketValue}',
                           style: const TextStyle(color: Colors.white),
-                        )
+                        ),
                       ],
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

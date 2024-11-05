@@ -13,11 +13,20 @@ class NotificationSettingsView extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-        title: const Text("Bildirim Ayarları",style: TextStyle(color: Colors.white),),
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),),
+        title: const Text(
+          'Bildirim Ayarları',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: const Center(
-        child: Text("Bildirimler",style: TextStyle(color: Colors.white),),
+        child: Text(
+          'Bildirimler',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

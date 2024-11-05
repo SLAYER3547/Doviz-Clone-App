@@ -1,5 +1,5 @@
-import 'package:doviz_clone_app/views/screens/onboarding_views/first_onboarding_page.dart';
 import 'package:doviz_clone_app/views/screens/home_views/home.dart';
+import 'package:doviz_clone_app/views/screens/onboarding_views/first_onboarding_page.dart';
 import 'package:doviz_clone_app/views/screens/onboarding_views/second_onboarding_page.dart';
 import 'package:flutter/material.dart';
 

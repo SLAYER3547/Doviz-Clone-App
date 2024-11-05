@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LoginOptionsBox extends StatelessWidget {
+  const LoginOptionsBox({
+    required this.imagePath,
+    required this.loginOptionText,
+    super.key,
+  });
   final String imagePath;
   final String loginOptionText;
-  const LoginOptionsBox({super.key,required this.imagePath,required this.loginOptionText});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +29,12 @@ class LoginOptionsBox extends StatelessWidget {
           ),
           Text(
             loginOptionText,
-            style:const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
-          )
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ],
       ),
     );

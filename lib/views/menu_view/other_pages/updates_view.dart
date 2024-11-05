@@ -43,7 +43,7 @@ class UpdatesView extends StatelessWidget {
               'Tüm bildirimleri artık tek bir sayfadan görebilirsiniz.',
               'İletişim sayfasından artık dilediğiniz gibi detaylı feedback verebilirsiniz.',
               'Cüzdanınızı analiz ederek kazandıran ve kaybettiren varlıklarınızı görebilirsiniz.',
-              'Widget sorunları giderildi.'
+              'Widget sorunları giderildi.',
             ],
           ),
           buildTimelineItem(
@@ -79,7 +79,11 @@ class UpdatesView extends StatelessWidget {
   }
 
   Widget buildTimelineItem(
-      BuildContext context, String date, String title, List<String> details) {
+    BuildContext context,
+    String date,
+    String title,
+    List<String> details,
+  ) {
     return Stack(
       children: [
         Positioned(
@@ -128,9 +132,9 @@ class UpdatesView extends StatelessWidget {
               (detail) => Container(
                 margin: const EdgeInsets.only(left: 18),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2.0),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   child: Text(
-                    "• $detail",
+                    '• $detail',
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 14,

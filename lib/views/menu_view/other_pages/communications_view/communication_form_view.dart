@@ -1,12 +1,12 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:async';
-import 'dart:io';
 
 class CommunicationFormView extends StatefulWidget {
+  const CommunicationFormView({required this.appBarTitle, super.key});
   final String appBarTitle;
-  const CommunicationFormView({super.key, required this.appBarTitle});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -50,7 +50,7 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
     final List<XFile>? pickedImages = await _picker.pickMultiImage();
     if (pickedImages != null) {
       setState(() {
-        for (var pickedImage in pickedImages) {
+        for (final pickedImage in pickedImages) {
           if (selectedImages.length < 3) {
             selectedImages.add(File(pickedImage.path));
           }
@@ -107,14 +107,13 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
           padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Text(
-                "E-Posta*",
+                'E-Posta*',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500,),
               ),
               const SizedBox(height: 10),
               Container(
@@ -139,8 +138,8 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                           )
                         : null,
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: Colors.grey)),
-                    hintText: "E-Postanızı giriniz",
+                        borderSide: BorderSide(width: 2, color: Colors.grey),),
+                    hintText: 'E-Postanızı giriniz',
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: Colors.grey),
                     ),
@@ -149,11 +148,11 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
               ),
               const SizedBox(height: 13),
               const Text(
-                "Konu*",
+                'Konu*',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500,),
               ),
               const SizedBox(height: 10),
               Container(
@@ -178,8 +177,8 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                           )
                         : null,
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: Colors.grey)),
-                    hintText: "örn. Dolar yatırımlarım",
+                        borderSide: BorderSide(width: 2, color: Colors.grey),),
+                    hintText: 'örn. Dolar yatırımlarım',
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: Colors.grey),
                     ),
@@ -188,11 +187,11 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
               ),
               const SizedBox(height: 13),
               const Text(
-                "Açıklama*",
+                'Açıklama*',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500,),
               ),
               const SizedBox(height: 10),
               Container(
@@ -218,9 +217,9 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                           )
                         : null,
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: Colors.grey)),
+                        borderSide: BorderSide(width: 2, color: Colors.grey),),
                     hintText:
-                        "Bu formdan, geri bildirimlerinizi iletebilirsiniz!",
+                        'Bu formdan, geri bildirimlerinizi iletebilirsiniz!',
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: Colors.grey),
                     ),
@@ -228,8 +227,7 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                 ),
               ),
               const SizedBox(height: 20),
-              selectedImages.isEmpty
-                  ? GestureDetector(
+              if (selectedImages.isEmpty) GestureDetector(
                       onTap: _pickImage,
                       child: Container(
                         padding: const EdgeInsets.all(13),
@@ -244,26 +242,25 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Fotoğraf ekle(1 MB)",
+                                  'Fotoğraf ekle(1 MB)',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w600,),
                                 ),
                                 Text(
-                                  ".jpeg, .png, .webp uzantılı dosyalar",
+                                  '.jpeg, .png, .webp uzantılı dosyalar',
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w500,),
                                 ),
                               ],
                             ),
                           ],
                         ),
                       ),
-                    )
-                  : Column(
+                    ) else Column(
                       children: [
                         Row(
                           children: [
@@ -272,7 +269,7 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                        horizontal: 5,),
                                     height: 100,
                                     width: 100,
                                     child: Image.file(
@@ -290,13 +287,13 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                                           decoration: BoxDecoration(
                                               color: Colors.red,
                                               borderRadius:
-                                                  BorderRadius.circular(50)),
+                                                  BorderRadius.circular(50),),
                                           child: const Center(
                                             child: FaIcon(
                                               FontAwesomeIcons.xmark,
                                               color: Colors.white,
                                             ),
-                                          )),
+                                          ),),
                                       onPressed: () => _removeImage(i),
                                     ),
                                   ),
@@ -321,10 +318,10 @@ class _CommunicationFormViewState extends State<CommunicationFormView> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: const Color(0xFF1a202c),
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(10),),
                 child: const Center(
                   child: Text(
-                    "Gönder",
+                    'Gönder',
                     style: TextStyle(color: Colors.white,fontWeight: FontWeight.w700,fontSize: 16),
                   ),
                 ),

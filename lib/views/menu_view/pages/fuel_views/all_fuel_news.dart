@@ -12,7 +12,7 @@ class AllFuelNews extends StatefulWidget {
 class _AllFuelNewsState extends State<AllFuelNews> {
   List<News> newsList = News.newsList;
   List<News> fuelNews =
-      News.newsList.where((news) => news.category == "Emtia").toList();
+      News.newsList.where((news) => news.category == 'Emtia').toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,7 @@ class _AllFuelNewsState extends State<AllFuelNews> {
             ),
             const SizedBox(width: 25),
             const Text(
-              "Akaryakıt Fiyatları",
+              'Akaryakıt Fiyatları',
               style: TextStyle(color: Colors.white),
             ),
           ],
@@ -56,7 +56,7 @@ class _AllFuelNewsState extends State<AllFuelNews> {
                                 newsList: fuelNews, // Pass all news
                                 initialIndex: index, // Pass the selected index
                                 selectedCategory:
-                                    "Emtia", // Pass the category of the selected news
+                                    'Emtia', // Pass the category of the selected news
                               ),
                             ),
                           );
@@ -82,7 +82,7 @@ class _AllFuelNewsState extends State<AllFuelNews> {
                                   ),
                                 ),
                                 Text(
-                                  "${fuelNews[index].date} ${fuelNews[index].time}",
+                                  '${fuelNews[index].date} ${fuelNews[index].time}',
                                   style: const TextStyle(
                                     color: Color(0xFFcaccd1),
                                     fontSize: 12,

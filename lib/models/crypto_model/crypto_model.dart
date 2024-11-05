@@ -1,17 +1,4 @@
 class CryptoList {
-  late String cryptoImage;
-  late String cryptoSymbolName;
-  late String cryptoName;
-  late double price;
-  late double cryptoValueForTl;
-  late double changePercentageOfWeek;
-  late double changePercentageOfMonth;
-  late double changePercentageOfYear;
-  late double fundSize;
-  late double maximumValueOf52Week;
-  late double marketValue;
-  late double changedValuePercentage;
-  late double changedValue;
 
   CryptoList(
     this.cryptoImage,
@@ -28,40 +15,53 @@ class CryptoList {
     this.changedValuePercentage,
     this.changedValue,
   );
+  late String cryptoImage;
+  late String cryptoSymbolName;
+  late String cryptoName;
+  late double price;
+  late double cryptoValueForTl;
+  late double changePercentageOfWeek;
+  late double changePercentageOfMonth;
+  late double changePercentageOfYear;
+  late double fundSize;
+  late double maximumValueOf52Week;
+  late double marketValue;
+  late double changedValuePercentage;
+  late double changedValue;
 
   static List<CryptoList> cryptoList = [
     CryptoList(
-        "https://static.coinpaprika.com/coin/trump-mog-trump/logo.png?rev=",
-        "TRUMP",
-        "MOG TRUMP",
+        'https://static.coinpaprika.com/coin/trump-mog-trump/logo.png?rev=',
+        'TRUMP',
+        'MOG TRUMP',
         0.170764,
         5.730,
         7534.74,
-        0.0,
-        0.0,
+        0,
+        0,
         280.104,
         0.180596,
         140234.794,
         74.42,
-        0.07),
+        0.07,),
     CryptoList(
-        "https://assets.coingecko.com/coins/images/39408/large/sigma_logo.jpg?1722053407",
-        "SIGMA",
-        "Sigma",
+        'https://assets.coingecko.com/coins/images/39408/large/sigma_logo.jpg?1722053407',
+        'SIGMA',
+        'Sigma',
         0.084608,
         2.120,
         -22.14,
         327.57,
-        0.0,
+        0,
         6644.894,
         0.096124,
         55593.74,
         0.01,
-        10.02),
+        10.02,),
     CryptoList(
-        "https://assets.coingecko.com/coins/images/3545/large/DSiD9ZhWsAE_8cS.png?1696504231",
-        "BTCP",
-        "Bitcoin Pro",
+        'https://assets.coingecko.com/coins/images/3545/large/DSiD9ZhWsAE_8cS.png?1696504231',
+        'BTCP',
+        'Bitcoin Pro',
         33.07,
         1364.29,
         20.41,
@@ -71,25 +71,25 @@ class CryptoList {
         176.82,
         5139.227,
         14.20,
-        4.11),
+        4.11,),
     CryptoList(
-        "https://s2.coinmarketcap.com/static/img/coins/200x200/28789.png",
-        "SILLY",
-        "Silly Dragon",
+        'https://s2.coinmarketcap.com/static/img/coins/200x200/28789.png',
+        'SILLY',
+        'Silly Dragon',
         0.02269212,
         0.57222100,
         -25.72,
         43.73,
-        0.00,
+        0,
         3457.018,
         0.146529,
         16709.559,
         1.66,
-        0.00),
+        0,),
     CryptoList(
-        "https://pbs.twimg.com/profile_images/1565875722547183618/XJ88LbOd_400x400.jpg",
-        "NETVR",
-        "Netvrk",
+        'https://pbs.twimg.com/profile_images/1565875722547183618/XJ88LbOd_400x400.jpg',
+        'NETVR',
+        'Netvrk',
         0.12449,
         4.83,
         12.51,
@@ -99,15 +99,15 @@ class CryptoList {
         0.378670,
         12781.830,
         -9.41,
-        0.01),
+        0.01,),
     CryptoList(
-      "https://assets.coingecko.com/coins/images/31401/large/sticker_%281%29.jpg?1702371083",
-      "SPX",
-      "SPX6900",
+      'https://assets.coingecko.com/coins/images/31401/large/sticker_%281%29.jpg?1702371083',
+      'SPX',
+      'SPX6900',
       0.829085,
       30.06,
       9.16,
-      1879.0,
+      1879,
       5206.71,
       45341.457,
       0.962628,
@@ -116,14 +116,14 @@ class CryptoList {
       0.10,
     ),
     CryptoList(
-      "https://academy-public.coinmarketcap.com/srd-optimized-uploads/ac0755a9017e4c0ba9cf413792fbd836.png",
-      "RETARDIO",
-      "RETARDIO",
+      'https://academy-public.coinmarketcap.com/srd-optimized-uploads/ac0755a9017e4c0ba9cf413792fbd836.png',
+      'RETARDIO',
+      'RETARDIO',
       0.166572,
       5.39,
       -6.92,
       186.82,
-      0.00,
+      0,
       4988.482,
       0.197,
       157022.589,
@@ -131,9 +131,9 @@ class CryptoList {
       -0.02,
     ),
     CryptoList(
-        "https://s2.coinmarketcap.com/static/img/coins/200x200/25220.png",
-        "BITCOIN",
-        "HarryPotterObamaSonic10lnu(ETH)",
+        'https://s2.coinmarketcap.com/static/img/coins/200x200/25220.png',
+        'BITCOIN',
+        'HarryPotterObamaSonic10lnu(ETH)',
         0.308778,
         12.07,
         15.97,
@@ -143,34 +143,34 @@ class CryptoList {
         0.373421,
         352732.747,
         -10.95,
-        -0.04),
+        -0.04,),
     CryptoList(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6xMWEcWc53ufDZJ-XIttyT3BsnBNbbDmclg&s",
-        "APU",
-        "Apu Apustaja",
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6xMWEcWc53ufDZJ-XIttyT3BsnBNbbDmclg&s',
+        'APU',
+        'Apu Apustaja',
         0.00087959,
         0.03764466,
         21.87,
         292.03,
-        0.00,
+        0,
         11685.789,
         0.00112794,
         360533516,
         -2.25,
-        -0.00),
+        -0,),
     CryptoList(
-        "https://s2.coinmarketcap.com/static/img/coins/200x200/29920.png",
-        "SLERF",
-        "Slerf",
+        'https://s2.coinmarketcap.com/static/img/coins/200x200/29920.png',
+        'SLERF',
+        'Slerf',
         0.246344,
         6.83,
         -16.05,
         25.40,
-        0.00,
+        0,
         20261594,
         0.479052,
         99922257,
         26.33,
-        -0.05),
+        -0.05,),
   ];
 }

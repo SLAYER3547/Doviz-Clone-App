@@ -1,11 +1,11 @@
+import 'package:doviz_clone_app/functions/main_page_functions.dart';
 import 'package:doviz_clone_app/models/crypto_model/crypto_model.dart';
+import 'package:doviz_clone_app/models/onboarding_models/watch_currency_list_model.dart';
 import 'package:doviz_clone_app/models/share_model/share_model.dart';
 import 'package:doviz_clone_app/views/auth_views/sign_up_view.dart';
 import 'package:doviz_clone_app/views/screens/home_views/rising_crypto_list_of_week.dart';
 import 'package:doviz_clone_app/views/screens/home_views/rising_share_list_of_week.dart';
 import 'package:flutter/material.dart';
-import 'package:doviz_clone_app/models/onboarding_models/watch_currency_list_model.dart';
-import 'package:doviz_clone_app/functions/main_page_functions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,14 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
     'Günlük',
     'Haftalık',
     'Aylık',
-    'Yıllık'
+    'Yıllık',
   ];
   final List<String> orderFilterList = [
     'Varsayılan',
     'Alfabetik (A-Z)',
     'Alfabetik (Z-A)',
     'Değişim Oranına Göre Artan',
-    'Değişim Oranına Göre Azalan'
+    'Değişim Oranına Göre Azalan',
   ];
 
   List<WatchCurrencyList> currencyList = WatchCurrencyList.currencyList;
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Image.asset(
-          "assets/images/app_logo.jpg",
+          'assets/images/app_logo.jpg',
           width: 80,
           height: 80,
         ),
@@ -64,9 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpView()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignUpView(),
+                    ),
+                  );
                 },
                 child: const Icon(
                   Icons.wallet,
@@ -81,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
             ],
-          )
+          ),
         ],
       ),
       body: CustomScrollView(
@@ -98,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Text(
-                    "Grafik",
+                    'Grafik',
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
@@ -107,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Değer",
+                      'Değer',
                       priceFilterList,
                       selectedPriceFilter,
                       (selected) {
@@ -144,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Fiyat Değişimi",
+                      'Fiyat Değişimi',
                       priceTimeStampFilterList,
                       selectedPriceTimeStampFilter,
                       (selected) {
@@ -181,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Sıralama",
+                      'Sıralama',
                       orderFilterList,
                       selectedOrderFilter,
                       (selected) {
@@ -243,21 +245,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 currencyList[index].currencySymbolName,
                                 style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                ),
                               ),
                               Row(
                                 children: [
-                                  Text(currencyList[index].currencyName,
-                                      style:
-                                          const TextStyle(color: Colors.white)),
+                                  Text(
+                                    currencyList[index].currencyName,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
                                   const Text(
-                                    " . 09.33",
+                                    ' . 09.33',
                                     style: TextStyle(color: Colors.white),
-                                  )
+                                  ),
                                 ],
-                              )
+                              ),
                             ],
                           ),
                           Column(
@@ -265,9 +269,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 currencyList[index].price.toString(),
                                 style: const TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20),
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20,
+                                ),
                               ),
                               Row(
                                 children: [
@@ -279,11 +284,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 7,
                                   ),
                                   Text(
-                                    "%${currencyList[index].changedPercentage}",
+                                    '%${currencyList[index].changedPercentage}',
                                     style: const TextStyle(color: Colors.green),
-                                  )
+                                  ),
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ],
@@ -305,16 +310,18 @@ class _HomeScreenState extends State<HomeScreen> {
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RisingCryptoListOfWeek()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RisingCryptoListOfWeek(),
+                  ),
+                );
               },
               child: Container(
                 margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
                 child: const Row(
                   children: [
                     Text(
-                      "Haftanın Yükselen Kripto Paraları",
+                      'Haftanın Yükselen Kripto Paraları',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(
@@ -357,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "\$${cryptoList[index].price.toStringAsFixed(6)}",
+                          '\$${cryptoList[index].price.toStringAsFixed(6)}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -368,21 +375,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              "%${cryptoList[index].changedValuePercentage.toStringAsFixed(2)}",
+                              '%${cryptoList[index].changedValuePercentage.toStringAsFixed(2)}',
                               style: const TextStyle(
                                 color: Colors.green,
                                 fontSize: 12,
                               ),
                             ),
                             Text(
-                              "\$${cryptoList[index].changedValue.toStringAsFixed(2)}",
+                              '\$${cryptoList[index].changedValue.toStringAsFixed(2)}',
                               style: const TextStyle(
                                 color: Colors.green,
                                 fontSize: 12,
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -394,16 +401,18 @@ class _HomeScreenState extends State<HomeScreen> {
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RisingShareListOfWeek()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RisingShareListOfWeek(),
+                  ),
+                );
               },
               child: Container(
                 margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
                 child: const Row(
                   children: [
                     Text(
-                      "Haftanın Yükselen Hisseleri",
+                      'Haftanın Yükselen Hisseleri',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(
@@ -446,7 +455,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "\$${shareList[index].price.toStringAsFixed(6)}",
+                          '\$${shareList[index].price.toStringAsFixed(6)}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -457,21 +466,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              "%${shareList[index].changedValuePercentage.toStringAsFixed(2)}",
+                              '%${shareList[index].changedValuePercentage.toStringAsFixed(2)}',
                               style: const TextStyle(
                                 color: Colors.green,
                                 fontSize: 12,
                               ),
                             ),
                             Text(
-                              "\$${shareList[index].changedValue.toStringAsFixed(2)}",
+                              '\$${shareList[index].changedValue.toStringAsFixed(2)}',
                               style: const TextStyle(
                                 color: Colors.green,
                                 fontSize: 12,
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   );

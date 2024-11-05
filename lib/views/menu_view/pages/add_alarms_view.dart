@@ -6,7 +6,7 @@ class AddAlarmsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("Alarm Ekle"),
+      child: Text('Alarm Ekle'),
     );
   }
 }

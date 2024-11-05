@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:doviz_clone_app/models/news_model/news.model.dart';
+import 'package:flutter/material.dart';
 
 class NewsDetailPage extends StatefulWidget {
-  final List<News> newsList;
-  final int initialIndex;
-  final String selectedCategory;
-
   const NewsDetailPage({
-    super.key,
     required this.newsList,
     required this.initialIndex,
     required this.selectedCategory,
+    super.key,
   });
+  final List<News> newsList;
+  final int initialIndex;
+  final String selectedCategory;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -36,18 +35,18 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
   }
 
   List<Widget> _buildPageIndicators() {
-    int totalNews = filteredNewsList.length;
-    int maxDots = 5;
+    final totalNews = filteredNewsList.length;
+    const maxDots = 5;
 
-    List<Widget> indicators = [];
-    int middleIndex = maxDots ~/ 2;
+    final indicators = <Widget>[];
+    const middleIndex = maxDots ~/ 2;
 
     if (totalNews > 0) {
-      int startIndex =
+      final startIndex =
           (currentIndex - middleIndex).clamp(0, totalNews - maxDots);
-      int endIndex = (startIndex + maxDots - 1).clamp(0, totalNews - 1);
+      final endIndex = (startIndex + maxDots - 1).clamp(0, totalNews - 1);
 
-      for (int i = startIndex; i <= endIndex; i++) {
+      for (var i = startIndex; i <= endIndex; i++) {
         double size;
         Color color;
 
@@ -65,13 +64,15 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
           color = Colors.white;
         }
 
-        indicators.add(Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0),
-          child: CircleAvatar(
-            radius: size,
-            backgroundColor: color,
+        indicators.add(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            child: CircleAvatar(
+              radius: size,
+              backgroundColor: color,
+            ),
           ),
-        ));
+        );
       }
     }
 
@@ -112,20 +113,22 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
         itemBuilder: (context, index) {
           final news = filteredNewsList[index];
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Stack(
                   children: [
-                    Image.network(news.imageUrl,
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width),
+                    Image.network(
+                      news.imageUrl,
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width,
+                    ),
                     Positioned(
                       bottom: 18,
                       left: 16,
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width/10*8,
+                        width: MediaQuery.of(context).size.width / 10 * 8,
                         child: Text(
                           news.title,
                           style: const TextStyle(
@@ -142,34 +145,46 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                       child: Row(
                         children: [
                           const Icon(Icons.edit, color: Colors.white, size: 14),
-                          Text(news.date,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            news.date,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           const SizedBox(width: 8),
-                          Text(news.time,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            news.time,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
-                Text(news.description,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold)),
+                Text(
+                  news.description,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 16),
-                Text(news.content,
-                    style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold)),
+                Text(
+                  news.content,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           );

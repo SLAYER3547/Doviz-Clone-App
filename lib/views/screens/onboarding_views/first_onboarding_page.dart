@@ -20,17 +20,17 @@ class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
     return Column(
       children: [
         Center(
-            child: Image.asset("assets/images/follow_list_boxes.png",
-                height: 250)),
+            child: Image.asset('assets/images/follow_list_boxes.png',
+                height: 250,),),
         const Text(
-          "Takip Listeni Oluştur",
+          'Takip Listeni Oluştur',
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
         const SizedBox(
           height: 15,
         ),
         const Text(
-          "Döviz, altın, kripto para, emtia ve borsa verilerinden anında haberdar olun!",
+          'Döviz, altın, kripto para, emtia ve borsa verilerinden anında haberdar olun!',
           style: TextStyle(color: Colors.grey, fontSize: 20),
           textAlign: TextAlign.center,
         ),
@@ -42,7 +42,7 @@ class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
           decoration: const BoxDecoration(
               color: Color(0xFF1a202c),
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10),),),
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
@@ -52,7 +52,7 @@ class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
                 height: 10,
                 decoration: BoxDecoration(
                     color: const Color(0xFFceced1),
-                    borderRadius: BorderRadius.circular(3)),
+                    borderRadius: BorderRadius.circular(3),),
               ),
               const SizedBox(
                 height: 15,
@@ -67,9 +67,9 @@ class _FirstOnboardingPageState extends State<FirstOnboardingPage> {
                     width: 5,
                   ),
                   Text(
-                    "Kur, Altın, Kripto Para",
+                    'Kur, Altın, Kripto Para',
                     style: TextStyle(color: Color(0xFFdee0e2)),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 20),

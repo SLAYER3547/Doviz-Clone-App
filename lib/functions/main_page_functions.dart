@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 void showPriceFilterBottomSheet(BuildContext context, String title,
     List<String> itemList, String selectedItem, Function(String) onSelected,
-    {bool showIcons = false}) {
+    {bool showIcons = false,}) {
   showModalBottomSheet(
     context: context,
     useRootNavigator: true,
@@ -12,7 +12,7 @@ void showPriceFilterBottomSheet(BuildContext context, String title,
     ),
     builder: (BuildContext context) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -20,14 +20,14 @@ void showPriceFilterBottomSheet(BuildContext context, String title,
               width: 70,
               height: 2,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                  color: Colors.white, borderRadius: BorderRadius.circular(5),),
             ),
             Text(
               title,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold,),
             ),
             const SizedBox(height: 10),
             ListView.builder(
@@ -38,7 +38,7 @@ void showPriceFilterBottomSheet(BuildContext context, String title,
                   leading: showIcons
                       ? Icon(
                           updateOrderIcon(itemList[
-                              index]), // Only show icon for sorting menu
+                              index],), // Only show icon for sorting menu
                           color: Colors.white,
                         )
                       : null,

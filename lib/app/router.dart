@@ -31,31 +31,31 @@ final router = GoRouter(
           GoRoute(
             path: AppRoutes.home,
             builder: (context, state) => const HomeScreen(),
-          )
-        ]),
+          ),
+        ],),
         StatefulShellBranch(routes: [
           GoRoute(
             path: AppRoutes.news,
             builder: (context, state) =>  const NewsView(),
-          )
-        ]),
+          ),
+        ],),
         StatefulShellBranch(routes: [
           GoRoute(
             path: AppRoutes.markets,
             builder: (context, state) => const MarketsView(),
-          )
-        ]),
+          ),
+        ],),
         StatefulShellBranch(routes: [
           GoRoute(
             path: AppRoutes.converter,
-            builder: (context, state) => const ConverterView(),
-          )
-        ]),
+            builder: (context, state) => const CurrencyConverterPage(),
+          ),
+        ],),
         StatefulShellBranch(routes: [
           GoRoute(
             path: AppRoutes.menu,
             builder: (context, state) => const MenuView(),
-          )
-        ])
-      ])
-]);
+          ),
+        ],),
+      ],),
+],);

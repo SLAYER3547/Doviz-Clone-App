@@ -21,7 +21,7 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
     'Değere Göre Artan',
     'Değere Göre Azalan',
     'Değişim Oranına Göre Artan',
-    'Değişim Oranına Göre Azalan'
+    'Değişim Oranına Göre Azalan',
   ];
   final List<String> priceTimeStampFilterList = [
     'Günlük',
@@ -43,19 +43,19 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
               Icons.arrow_back_ios,
               color: Colors.white,
               size: 18,
-            )),
+            ),),
         title: const Center(
             child: Text(
-          "Haftanın Yükselen Hisseleri",
+          'Haftanın Yükselen Hisseleri',
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-        )),
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold,),
+        ),),
         actions: const [
           Icon(
             Icons.star,
             color: Color(0xFFfe9e12),
             size: 20,
-          )
+          ),
         ],
       ),
       body: CustomScrollView(
@@ -68,7 +68,7 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Sıralama",
+                      'Sıralama',
                       orderFilterList,
                       selectedOrderFilter,
                       (selected) {
@@ -107,7 +107,7 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Sıralama",
+                      'Sıralama',
                       priceTimeStampFilterList,
                       selectedPriceTimeStampFilter,
                       (selected) {
@@ -115,7 +115,6 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                           selectedPriceTimeStampFilter = selected;
                         });
                       },
-                      showIcons: false,
                     );
                   },
                   child: Container(
@@ -179,7 +178,7 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                                     fundSizeTl: shareList[index].fundSizeTl,
                                     fundSizeLot: shareList[index].fundSizeLot,
                                     capitalReceipts:
-                                        shareList[index].capitalReceipts)));
+                                        shareList[index].capitalReceipts,),),);
                       },
                       child: ListTile(
                         title: Row(
@@ -194,7 +193,7 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w700,),
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width /
@@ -204,24 +203,24 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                                     shareList[index].shareName,
                                     style: const TextStyle(
                                         color: Colors.grey,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w500,),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             Column(
                               children: [
                                 Text(
-                                  "\$${shareList[index].price.toString()}",
+                                  '\$${shareList[index].price}',
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w700,),
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      "\$${shareList[index].changedValue.toString()}",
+                                      '\$${shareList[index].changedValue}',
                                       style:
                                           const TextStyle(color: Colors.green),
                                     ),
@@ -229,12 +228,12 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "%${shareList[index].changedValuePercentage.toString()}",
+                                      '%${shareList[index].changedValuePercentage}',
                                       style:
                                           const TextStyle(color: Colors.green),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                           ],

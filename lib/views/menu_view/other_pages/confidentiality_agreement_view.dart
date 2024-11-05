@@ -13,11 +13,20 @@ class ConfidentialityAgreementView extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-        title: const Text("Gizlilik Sözleşmesi",style: TextStyle(color: Colors.white),),
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),),
+        title: const Text(
+          'Gizlilik Sözleşmesi',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: const Center(
-        child: Text("Gizlilik Sözleşmesi",style: TextStyle(color: Colors.white),),
+        child: Text(
+          'Gizlilik Sözleşmesi',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

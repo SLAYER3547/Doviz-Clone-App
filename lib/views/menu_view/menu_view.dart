@@ -33,7 +33,7 @@ class _MenuViewState extends State<MenuView> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: const Text(
-            "Menü",
+            'Menü',
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -50,16 +50,16 @@ class _MenuViewState extends State<MenuView> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginView()));
+                                  builder: (context) => const LoginView(),),);
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 10 * 3.7,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               color: const Color(0xFF172e3e),
-                              borderRadius: BorderRadius.circular(50)),
+                              borderRadius: BorderRadius.circular(50),),
                           child: const Text(
-                            "Giriş Yapın",
+                            'Giriş Yapın',
                             style: TextStyle(color: Colors.white, fontSize: 18),
                             textAlign: TextAlign.center,
                           ),
@@ -73,21 +73,21 @@ class _MenuViewState extends State<MenuView> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUpView()));
+                                  builder: (context) => const SignUpView(),),);
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width / 10 * 3.7,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               color: const Color(0xFFffffff),
-                              borderRadius: BorderRadius.circular(50)),
+                              borderRadius: BorderRadius.circular(50),),
                           child: const Text(
-                            "Kaydol",
+                            'Kaydol',
                             style: TextStyle(color: Colors.black, fontSize: 18),
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   GestureDetector(
@@ -95,7 +95,7 @@ class _MenuViewState extends State<MenuView> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SignUpView()));
+                              builder: (context) => const SignUpView(),),);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 10),
@@ -104,23 +104,23 @@ class _MenuViewState extends State<MenuView> {
                       height: 60,
                       decoration: BoxDecoration(
                           color: const Color(0xFF1a202c),
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(10),),
                       child: Row(
                         children: [
                           Image.asset(
-                            "assets/images/app_logo_2.jpg",
+                            'assets/images/app_logo_2.jpg',
                             width: 60,
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           const Text(
-                            "Reklamsız kullan!",
+                            'Reklamsız kullan!',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 16),
-                          )
+                                fontSize: 16,),
+                          ),
                         ],
                       ),
                     ),
@@ -135,7 +135,7 @@ class _MenuViewState extends State<MenuView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Sayfalar",
+                        'Sayfalar',
                         style: TextStyle(color: Color(0xFF606a77)),
                       ),
                       Divider(
@@ -145,7 +145,7 @@ class _MenuViewState extends State<MenuView> {
                         endIndent: 5,
                       ),
                     ],
-                  )),
+                  ),),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -165,10 +165,10 @@ class _MenuViewState extends State<MenuView> {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 18),
+                                  fontSize: 18,),
                             ),
                             const Icon(Icons.arrow_forward_ios,
-                                color: Colors.white)
+                                color: Colors.white,),
                           ],
                         ),
                       ),
@@ -191,7 +191,7 @@ class _MenuViewState extends State<MenuView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ayarlar",
+                        'Ayarlar',
                         style: TextStyle(color: Color(0xFF606a77)),
                       ),
                       Divider(
@@ -201,7 +201,7 @@ class _MenuViewState extends State<MenuView> {
                         endIndent: 5,
                       ),
                     ],
-                  )),
+                  ),),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -211,7 +211,7 @@ class _MenuViewState extends State<MenuView> {
                       ListTile(
                         onTap: () {
                           _navigateToPage(
-                              context, settingsPagesList[index].targetPage);
+                              context, settingsPagesList[index].targetPage,);
                         },
                         leading: Icon(settingsPagesList[index].pageIcon),
                         title: Row(
@@ -222,10 +222,10 @@ class _MenuViewState extends State<MenuView> {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 18),
+                                  fontSize: 18,),
                             ),
                             const Icon(Icons.arrow_forward_ios,
-                                color: Colors.white)
+                                color: Colors.white,),
                           ],
                         ),
                       ),
@@ -248,7 +248,7 @@ class _MenuViewState extends State<MenuView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Diğer",
+                        'Diğer',
                         style: TextStyle(color: Color(0xFF606a77)),
                       ),
                       Divider(
@@ -258,7 +258,7 @@ class _MenuViewState extends State<MenuView> {
                         endIndent: 5,
                       ),
                     ],
-                  )),
+                  ),),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -268,7 +268,7 @@ class _MenuViewState extends State<MenuView> {
                       ListTile(
                         onTap: () {
                           _navigateToPage(
-                              context, otherMenuPagesList[index].targetPage);
+                              context, otherMenuPagesList[index].targetPage,);
                         },
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -278,10 +278,10 @@ class _MenuViewState extends State<MenuView> {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 18),
+                                  fontSize: 18,),
                             ),
                             const Icon(Icons.arrow_forward_ios,
-                                color: Colors.white)
+                                color: Colors.white,),
                           ],
                         ),
                       ),
@@ -298,6 +298,6 @@ class _MenuViewState extends State<MenuView> {
               ),
             ),
           ],
-        ));
+        ),);
   }
 }

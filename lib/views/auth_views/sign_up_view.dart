@@ -22,8 +22,8 @@ class SignUpView extends StatelessWidget {
                   Icons.close,
                   color: Colors.white,
                   size: 30,
-                )),
-          )
+                ),),
+          ),
         ],
         automaticallyImplyLeading: false,
       ),
@@ -33,16 +33,16 @@ class SignUpView extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/images/app_logo_3.png",
+                  'assets/images/app_logo_3.png',
                   width: 150,
                   height: 100,
                 ),
                 const Text(
-                  "Ücretsiz üye olun",
+                  'Ücretsiz üye olun',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w600,),
                 ),
                 const SizedBox(
                   height: 15,
@@ -61,9 +61,9 @@ class SignUpView extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 10 * 7,
                       child: const Text(
-                          "Portföyünüzü ve cüzdanınızı tüm cihazlarınızda ortak yönetin!",
-                          style: TextStyle(color: Colors.white, fontSize: 16)),
-                    )
+                          'Portföyünüzü ve cüzdanınızı tüm cihazlarınızda ortak yönetin!',
+                          style: TextStyle(color: Colors.white, fontSize: 16),),
+                    ),
                   ],
                 ),
                 Row(
@@ -79,30 +79,30 @@ class SignUpView extends StatelessWidget {
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 10 * 7,
-                      child: const Text("Döviz uygulamasını kişiselleştirin!",
-                          style: TextStyle(color: Colors.white, fontSize: 16)),
-                    )
+                      child: const Text('Döviz uygulamasını kişiselleştirin!',
+                          style: TextStyle(color: Colors.white, fontSize: 16),),
+                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text(
-                  "* Verileriniz kayıt olunan hesap ile eşitlenecektir",
+                  '* Verileriniz kayıt olunan hesap ile eşitlenecektir',
                   style: TextStyle(color: Colors.white),
                 ),
                 const LoginOptionsBox(
                     imagePath:
-                        "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png",
-                    loginOptionText: "Google ile üye olun"),
+                        'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png',
+                    loginOptionText: 'Google ile üye olun',),
                 const LoginOptionsBox(
                     imagePath:
-                        "https://seeklogo.com/images/A/apple-logo-E3DBF3AE34-seeklogo.com.png",
-                    loginOptionText: "Apple ile üye olun"),
+                        'https://seeklogo.com/images/A/apple-logo-E3DBF3AE34-seeklogo.com.png',
+                    loginOptionText: 'Apple ile üye olun',),
                 const LoginOptionsBox(
                     imagePath:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPBc6ABF7dC86Cpl5dWd_ZBAbDsQq0Pq85Q&s",
-                    loginOptionText: "E-Posta ile üye olun"),
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPBc6ABF7dC86Cpl5dWd_ZBAbDsQq0Pq85Q&s',
+                    loginOptionText: 'E-Posta ile üye olun',),
                 const SizedBox(
                   height: 15,
                 ),
@@ -110,27 +110,27 @@ class SignUpView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Hesabınız var mı?",
+                      'Hesabınız var mı?',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold,),
                     ),
                     TextButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginView()));
+                                  builder: (context) => const LoginView(),),);
                         },
                         child: const Text(
-                          "Giriş yapın",
+                          'Giriş yapın',
                           style: TextStyle(
                               decoration: TextDecoration.underline,
                               decorationColor: Color(0xFF185fb9),
                               decorationStyle: TextDecorationStyle.solid,
-                              decorationThickness: 3.0,
+                              decorationThickness: 3,
                               color: Color(0xFF185fb9),
-                              fontWeight: FontWeight.bold),
-                        ))
+                              fontWeight: FontWeight.bold,),
+                        ),),
                   ],
                 ),
               ],
@@ -144,53 +144,53 @@ class SignUpView extends StatelessWidget {
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "Kullanıcı Sözleşmesi",
+                        'Kullanıcı Sözleşmesi',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Color(0xFF185fb9),
                             decorationStyle: TextDecorationStyle.solid,
-                            decorationThickness: 3.0,
+                            decorationThickness: 3,
                             color: Color(0xFF185fb9),
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      )),
-                  const Text("ve",
-                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                            fontSize: 16,),
+                      ),),
+                  const Text('ve',
+                      style: TextStyle(color: Colors.white, fontSize: 16),),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "Gizlilik Şartları",
+                        'Gizlilik Şartları',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Color(0xFF185fb9),
                             decorationStyle: TextDecorationStyle.solid,
-                            decorationThickness: 3.0,
+                            decorationThickness: 3,
                             color: Color(0xFF185fb9),
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      )),
+                            fontSize: 16,),
+                      ),),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Sorun yaşıyorsanız",
+                    'Sorun yaşıyorsanız',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold,),
                   ),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "bize ulaşın!",
+                        'bize ulaşın!',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationColor: Color(0xFF185fb9),
                             decorationStyle: TextDecorationStyle.solid,
-                            decorationThickness: 3.0,
+                            decorationThickness: 3,
                             color: Color(0xFF185fb9),
-                            fontWeight: FontWeight.bold),
-                      ))
+                            fontWeight: FontWeight.bold,),
+                      ),),
                 ],
               ),
             ],

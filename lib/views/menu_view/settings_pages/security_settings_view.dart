@@ -13,11 +13,11 @@ class SecuritySettingsView extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-        title: const Text("Güvenlik Ayarları",style: TextStyle(color: Colors.white),),
+            child: const Icon(Icons.arrow_back_ios,color: Colors.white,),),
+        title: const Text('Güvenlik Ayarları',style: TextStyle(color: Colors.white),),
       ),
       body: const Center(
-        child: Text("Güvenlik Ayarları",style: TextStyle(color: Colors.white),),
+        child: Text('Güvenlik Ayarları',style: TextStyle(color: Colors.white),),
       ),
     );
   }

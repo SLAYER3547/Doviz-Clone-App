@@ -6,7 +6,7 @@ class IpoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("Halka Arz"),
+      child: Text('Halka Arz'),
     );
   }
 }

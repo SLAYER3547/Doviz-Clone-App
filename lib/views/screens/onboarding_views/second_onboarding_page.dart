@@ -11,17 +11,17 @@ class SecondOnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset("assets/images/notification.png", height: 300), // Görsel
+        Image.asset('assets/images/notification.png', height: 300), // Görsel
         const SizedBox(height: 20),
         const Text(
-          "Bildirimleri Aç",
+          'Bildirimleri Aç',
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
         const SizedBox(
           height: 15,
         ),
         const Text(
-          "Piyasalarla ilgili en önemli gelişmelerden ilk senin haberin olsun! Bildirimleri istediğin zaman kapatabileceksin.",
+          'Piyasalarla ilgili en önemli gelişmelerden ilk senin haberin olsun! Bildirimleri istediğin zaman kapatabileceksin.',
           style: TextStyle(color: Colors.grey, fontSize: 20),
           textAlign: TextAlign.center,
         ),
@@ -30,32 +30,32 @@ class SecondOnboardingPage extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () async {
-            showDialog(
+            await showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: const Text("Bildirimlere izin verilsin mi?"),
+                  title: const Text('Bildirimlere izin verilsin mi?'),
                   content:
-                      const Text("Bildirimler almayı kabul ediyor musunuz?"),
+                      const Text('Bildirimler almayı kabul ediyor musunuz?'),
                   actions: [
                     TextButton(
                       onPressed: () async {
                         Navigator.pop(context); // Dialogu kapat
 
-                        PermissionStatus status =
+                        final status =
                             await Permission.notification.request();
 
                         if (status.isGranted) {
                           // Bildirim izni verildiğinde anasayfaya yönlendir
                           // ignore: use_build_context_synchronously
-                          Navigator.push(
+                          await Navigator.push(
                               // ignore: use_build_context_synchronously
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                                  builder: (context) => const HomeScreen(),),);
                         }
                       },
-                      child: const Text("Evet"),
+                      child: const Text('Evet'),
                     ),
                     TextButton(
                       onPressed: () {
@@ -64,7 +64,7 @@ class SecondOnboardingPage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content:
-                                Text("Daha sonra bildirimleri açabilirsiniz."),
+                                Text('Daha sonra bildirimleri açabilirsiniz.'),
                           ),
                         );
 
@@ -72,9 +72,9 @@ class SecondOnboardingPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
+                                builder: (context) => const HomeScreen(),),);
                       },
-                      child: const Text("Hayır"),
+                      child: const Text('Hayır'),
                     ),
                   ],
                 );
@@ -99,13 +99,13 @@ class SecondOnboardingPage extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "Bildirimlere İzin Ver",
+                  'Bildirimlere İzin Ver',
                   style: TextStyle(color: Colors.white, fontSize: 18),
-                )
+                ),
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

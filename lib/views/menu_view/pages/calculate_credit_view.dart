@@ -6,7 +6,7 @@ class CalculateCreditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("Kredi Hesaplama"),
+      child: Text('Kredi Hesaplama'),
     );
   }
 }

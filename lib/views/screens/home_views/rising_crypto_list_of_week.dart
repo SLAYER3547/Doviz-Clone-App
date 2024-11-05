@@ -1,7 +1,7 @@
+import 'package:doviz_clone_app/functions/main_page_functions.dart';
 import 'package:doviz_clone_app/models/crypto_model/crypto_model.dart';
 import 'package:doviz_clone_app/views/screens/home_views/crypto_detail_view.dart';
 import 'package:flutter/material.dart';
-import 'package:doviz_clone_app/functions/main_page_functions.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RisingCryptoListOfWeek extends StatefulWidget {
@@ -21,7 +21,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
     'Değere Göre Artan',
     'Değere Göre Azalan',
     'Değişim Oranına Göre Artan',
-    'Değişim Oranına Göre Azalan'
+    'Değişim Oranına Göre Azalan',
   ];
   final List<String> priceTimeStampFilterList = [
     'Günlük',
@@ -43,19 +43,19 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
               Icons.arrow_back_ios,
               color: Colors.white,
               size: 18,
-            )),
+            ),),
         title: const Center(
             child: Text(
-          "Haftanın Yükselen Kripto Paraları",
+          'Haftanın Yükselen Kripto Paraları',
           style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-        )),
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold,),
+        ),),
         actions: const [
           Icon(
             Icons.star,
             color: Color(0xFFfe9e12),
             size: 20,
-          )
+          ),
         ],
       ),
       body: CustomScrollView(
@@ -68,7 +68,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Sıralama",
+                      'Sıralama',
                       orderFilterList,
                       selectedOrderFilter,
                       (selected) {
@@ -107,7 +107,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                   onTap: () {
                     showPriceFilterBottomSheet(
                       context,
-                      "Sıralama",
+                      'Sıralama',
                       priceTimeStampFilterList,
                       selectedPriceTimeStampFilter,
                       (selected) {
@@ -115,7 +115,6 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                           selectedPriceTimeStampFilter = selected;
                         });
                       },
-                      showIcons: false,
                     );
                   },
                   child: Container(
@@ -176,7 +175,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                                     changedPercentage: cryptoList[index]
                                         .changedValuePercentage,
                                     changedValue:
-                                        cryptoList[index].changedValue)));
+                                        cryptoList[index].changedValue,),),);
                       },
                       child: ListTile(
                         title: Row(
@@ -191,7 +190,7 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w700,),
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width /
@@ -201,24 +200,24 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                                     cryptoList[index].cryptoName,
                                     style: const TextStyle(
                                         color: Colors.grey,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w500,),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             Column(
                               children: [
                                 Text(
-                                  "\$${cryptoList[index].price.toString()}",
+                                  '\$${cryptoList[index].price}',
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w700,),
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      "\$${cryptoList[index].changedValue.toString()}",
+                                      '\$${cryptoList[index].changedValue}',
                                       style:
                                           const TextStyle(color: Colors.green),
                                     ),
@@ -226,12 +225,12 @@ class _RisingCryptoListOfWeekState extends State<RisingCryptoListOfWeek> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "%${cryptoList[index].changedValuePercentage.toString()}",
+                                      '%${cryptoList[index].changedValuePercentage}',
                                       style:
                                           const TextStyle(color: Colors.green),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                           ],
