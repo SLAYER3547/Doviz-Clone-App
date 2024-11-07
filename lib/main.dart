@@ -1,5 +1,7 @@
-import 'package:doviz_clone_app/app/router.dart';
+import 'package:doviz_clone_app/core/bloc/currency_list_bloc/currency_list_cubit.dart';
+import 'package:doviz_clone_app/core/utils/routing/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MainRoot());
@@ -10,9 +12,12 @@ class MainRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (_) => CurrencyListCubit(),
+      child: MaterialApp.router(
+        routerConfig: router,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
