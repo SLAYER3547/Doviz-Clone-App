@@ -152,6 +152,7 @@ class NotificationSettingsView extends StatelessWidget {
                                             index, isChecked!,),);
                                   },
                                 ),
+                                
                               ],
                             );
                           }),
