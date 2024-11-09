@@ -11,7 +11,7 @@ class SettingsPagesList {
   late Widget targetPage;
 
   static List<SettingsPagesList> settingsPagesList = [
-    SettingsPagesList(Icons.wifi, 'Bildirim', const NotificationSettingsView()),
+    SettingsPagesList(Icons.wifi, 'Bildirim',  NotificationSettingsView()),
     SettingsPagesList(
         Icons.brush_outlined, 'Görünüm', const AppThemeSettingView(),),
     SettingsPagesList(

@@ -2,7 +2,6 @@ import 'package:doviz_clone_app/core/bloc/currency_list_bloc/currency_list_cubit
 import 'package:doviz_clone_app/core/models/currency_model/currency_model.dart';
 import 'package:doviz_clone_app/core/utils/themes/color.dart';
 import 'package:doviz_clone_app/ui/views/screens/converter_view/currency_category_menu.dart';
-import 'package:doviz_clone_app/ui/views/screens/converter_view/edit_currency_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,11 +20,17 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       List.from(currencies.where((e) => e.isSelected == true));
   Map<String, TextEditingController> amountControllers = {};
   Map<String, FocusNode> focusNodes = {};
+  bool isEditMode = false;
+  List<Currency> editableCurrencyList = [];
 
   @override
   void initState() {
     super.initState();
     initializeControllers();
+    final cubit = context.read<CurrencyListCubit>();
+    editableCurrencyList = cubit.state.currencyList
+        .where((currency) => currency.isSelected)
+        .toList();
   }
 
   void initializeControllers() {
@@ -65,26 +70,6 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       );
       focusNodes.putIfAbsent(currency.currencyName, FocusNode.new);
       updateAllCurrencies(currency.currencyName, 1);
-    });
-  }
-
-  void openEditMode() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            EditCurrencyListPage(displayedCurrencies: displayedCurrencies),
-      ),
-    ).then((updatedCurrencies) {
-      if (updatedCurrencies != null) {
-        setState(() {
-          // Burada tür dönüşümü yapıyoruz
-          displayedCurrencies = List<Currency>.from(updatedCurrencies as List);
-          amountControllers.clear();
-          focusNodes.clear();
-          initializeControllers();
-        });
-      }
     });
   }
 
@@ -163,14 +148,33 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
           style: TextStyle(color: defaultTextColor),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.edit_outlined, color: iconColor),
-            onPressed: openEditMode,
-          ),
-          IconButton(
-            icon: const Icon(Icons.add, color: iconColor),
-            onPressed: openAddCurrencyMenu,
-          ),
+          if (isEditMode)
+            IconButton(
+              icon: const Icon(
+                Icons.check,
+                color: iconColor,
+              ),
+              onPressed: () {
+                // Save edits and exit edit mode
+                setState(() {
+                  isEditMode = false;
+                });
+              },
+            )
+          else ...[
+            IconButton(
+              icon: const Icon(Icons.edit_outlined, color: iconColor),
+              onPressed: () {
+                setState(() {
+                  isEditMode = true;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.add, color: iconColor),
+              onPressed: openAddCurrencyMenu,
+            ),
+          ],
         ],
       ),
       body: Column(
@@ -228,114 +232,219 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
           Expanded(
             child: BlocBuilder<CurrencyListCubit, CurrencyListState>(
               builder: (context, state) {
-                return ListView.builder(
-                  itemCount:
-                      state.currencyList.where((c) => c.isSelected).length,
-                  itemBuilder: (context, index) {
-                    final currency = state.currencyList
-                        .where((c) => c.isSelected)
-                        .toList()[index];
-                    final focusNode = focusNodes[currency.currencyName];
-
-                    return ListTile(
-                      title: Container(
-                        decoration: BoxDecoration(
-                          color: systemMainGreyColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Image.network(
-                                    currency.currencyImage,
-                                    width: 40,
-                                    height: 40,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      currency.currencySymbolName,
-                                      style: const TextStyle(
-                                        color: defaultTextColor,
-                                        fontWeight: FontWeight.w700,
+                editableCurrencyList = state.currencyList
+                    .where((currency) => currency.isSelected)
+                    .toList();
+                return isEditMode
+                    ? ReorderableListView(
+                        children: editableCurrencyList.map((currency) {
+                          return ListTile(
+                            key: ValueKey(currency),
+                            title: Container(
+                              decoration: BoxDecoration(
+                                color: systemMainGreyColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 15,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.menu,
+                                        color: iconColor,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
-                                      child: Text(
-                                        currency.currencyName,
-                                        style: const TextStyle(
-                                          color: systemGreyColor,
-                                          fontWeight: FontWeight.w500,
+                                      const SizedBox(width: 15),
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.network(
+                                          currency.currencyImage,
+                                          width: 40,
+                                          height: 40,
                                         ),
                                       ),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            currency.currencySymbolName,
+                                            style: const TextStyle(
+                                              color: defaultTextColor,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.5,
+                                            child: Text(
+                                              currency.currencyName,
+                                              style: const TextStyle(
+                                                color: systemGreyColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.close_rounded,
+                                      color: iconColor,
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextField(
-                                controller:
-                                    amountControllers[currency.currencyName],
-                                focusNode: focusNode,
-                                decoration: const InputDecoration(
-                                  hintText: 'Miktar',
-                                  hintStyle: TextStyle(color: defaultTextColor),
-                                  border: InputBorder.none,
-                                ),
-                                keyboardType: TextInputType.number,
-                                style: const TextStyle(color: defaultTextColor),
-                                textAlign: TextAlign.right,
-                                onTap: () {
-                                  if (amountControllers[currency.currencyName]
-                                          ?.text
-                                          .isEmpty ??
-                                      true) {
-                                    amountControllers[currency.currencyName]
-                                        ?.text = '1';
-                                    updateAllCurrencies(
-                                        currency.currencyName, 1,);
-                                  }
-                                },
-                                onChanged: (value) {
-                                  if (value.isEmpty) {
-                                    amountControllers[currency.currencyName]
-                                        ?.text = '0';
-                                    updateAllCurrencies(
-                                        currency.currencyName, 0,);
-                                  } else {
-                                    final amount = double.tryParse(value) ?? 1;
-                                    updateAllCurrencies(
-                                      currency.currencyName,
-                                      amount,
-                                    );
-                                  }
-                                },
-                                onEditingComplete: () {
-                                  focusNode?.unfocus();
-                                },
+                                    onPressed: () {
+                                      // Make the item invisible
+                                      context
+                                          .read<CurrencyListCubit>()
+                                          .hideCurrency(currency);
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
+                          );
+                        }).toList(),
+                        onReorder: (oldIndex, newIndex) {
+                          context
+                              .read<CurrencyListCubit>()
+                              .reorderCurrencies(oldIndex, newIndex);
+                        },
+                      )
+                    : ListView.builder(
+                        itemCount: state.currencyList
+                            .where((c) => c.isSelected)
+                            .length,
+                        itemBuilder: (context, index) {
+                          final currency = state.currencyList
+                              .where((c) => c.isSelected)
+                              .toList()[index];
+                          final focusNode = focusNodes[currency.currencyName];
+
+                          return ListTile(
+                            title: Container(
+                              decoration: BoxDecoration(
+                                color: systemMainGreyColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 15,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.network(
+                                          currency.currencyImage,
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            currency.currencySymbolName,
+                                            style: const TextStyle(
+                                              color: defaultTextColor,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.5,
+                                            child: Text(
+                                              currency.currencyName,
+                                              style: const TextStyle(
+                                                color: systemGreyColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 100,
+                                    child: TextField(
+                                      controller: amountControllers[
+                                          currency.currencyName],
+                                      focusNode: focusNode,
+                                      decoration: const InputDecoration(
+                                        hintText: 'Miktar',
+                                        hintStyle:
+                                            TextStyle(color: defaultTextColor),
+                                        border: InputBorder.none,
+                                      ),
+                                      keyboardType: TextInputType.number,
+                                      style: const TextStyle(
+                                          color: defaultTextColor,),
+                                      textAlign: TextAlign.right,
+                                      onTap: () {
+                                        if (amountControllers[
+                                                    currency.currencyName]
+                                                ?.text
+                                                .isEmpty ??
+                                            true) {
+                                          amountControllers[
+                                                  currency.currencyName]
+                                              ?.text = '1';
+                                          updateAllCurrencies(
+                                            currency.currencyName,
+                                            1,
+                                          );
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        if (value.isEmpty) {
+                                          amountControllers[
+                                                  currency.currencyName]
+                                              ?.text = '0';
+                                          updateAllCurrencies(
+                                            currency.currencyName,
+                                            0,
+                                          );
+                                        } else {
+                                          final amount =
+                                              double.tryParse(value) ?? 1;
+                                          updateAllCurrencies(
+                                            currency.currencyName,
+                                            amount,
+                                          );
+                                        }
+                                      },
+                                      onEditingComplete: () {
+                                        focusNode?.unfocus();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
               },
             ),
           ),
