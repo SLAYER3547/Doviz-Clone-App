@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-void showPriceFilterBottomSheet(BuildContext context, String title,
-    List<String> itemList, String selectedItem, Function(String) onSelected,
-    {bool showIcons = false,}) {
+void showPriceFilterBottomSheet(
+  BuildContext context,
+  String title,
+  List<String> itemList,
+  String selectedItem,
+  Function(String) onSelected, {
+  bool showIcons = false,
+}) {
   showModalBottomSheet(
     context: context,
     useRootNavigator: true,
@@ -20,14 +25,17 @@ void showPriceFilterBottomSheet(BuildContext context, String title,
               width: 70,
               height: 2,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5),),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
             Text(
               title,
               style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,),
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 10),
             ListView.builder(
@@ -37,8 +45,9 @@ void showPriceFilterBottomSheet(BuildContext context, String title,
                 return ListTile(
                   leading: showIcons
                       ? Icon(
-                          updateOrderIcon(itemList[
-                              index],), // Only show icon for sorting menu
+                          updateOrderIcon(
+                            itemList[index],
+                          ), // Only show icon for sorting menu
                           color: Colors.white,
                         )
                       : null,
@@ -71,6 +80,8 @@ String getOrderText(String selectedOrderFilter) {
   }
   return selectedOrderFilter;
 }
+
+
 
 IconData updateOrderIcon(String selectedOrderFilter) {
   if (selectedOrderFilter == 'Alfabetik (A-Z)') {

@@ -4,6 +4,7 @@ import 'package:doviz_clone_app/ui/views/screens/converter_view/converter_view.d
 import 'package:doviz_clone_app/ui/views/screens/home_views/home.dart';
 import 'package:doviz_clone_app/ui/views/screens/markets_view/markets_view.dart';
 import 'package:doviz_clone_app/ui/views/screens/news_view/news.view.dart';
+import 'package:doviz_clone_app/ui/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,42 +21,58 @@ class AppRoutes {
 
 final router = GoRouter(
   navigatorKey: _rooterKey,
-  initialLocation: AppRoutes.home,
+  initialLocation: '/splash', // İlk olarak SplashScreen açılacak
   routes: [
-  StatefulShellRoute.indexedStack(
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => AppView(
-            navigationShell: navigationShell,
-          ),
+        navigationShell: navigationShell,
+      ),
       branches: [
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: AppRoutes.home,
-            builder: (context, state) => const HomeScreen(),
-          ),
-        ],),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: AppRoutes.news,
-            builder: (context, state) =>  const NewsView(),
-          ),
-        ],),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: AppRoutes.markets,
-            builder: (context, state) => const MarketsView(),
-          ),
-        ],),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: AppRoutes.converter,
-            builder: (context, state) => const CurrencyConverterPage(),
-          ),
-        ],),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: AppRoutes.menu,
-            builder: (context, state) => const MenuView(),
-          ),
-        ],),
-      ],),
-],);
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.home,
+              builder: (context, state) => const HomeScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.news,
+              builder: (context, state) => const NewsView(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.markets,
+              builder: (context, state) => const MarketsView(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.converter,
+              builder: (context, state) => const CurrencyConverterPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.menu,
+              builder: (context, state) => const MenuView(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+);

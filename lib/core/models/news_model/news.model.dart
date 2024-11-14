@@ -774,7 +774,7 @@ class News {
       date: '2024-10-16',
       time: '10:00',
       imageUrl:
-          'https://static.doviz.com/thumbs/news/motorine-zam-geldi-7-ilde-guncel-akaryakit-fiyatlari-1729836729_320x180.jpg',
+          'https://habertimecomtr.teimg.com/crop/1280x720/habertime-com-tr/uploads/2024/10/akaryakita-zam-icin-saatler-kaldi-habertime24102024.png',
       description:
           'Akaryakıta salı günü gelen indirimlerin ardından bugün motorin fiyatlarında artışa gidildi. İşte zam sonrası 7 ilde güncel motorin fiyatları..',
       content:

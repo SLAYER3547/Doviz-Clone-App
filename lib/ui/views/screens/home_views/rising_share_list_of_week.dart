@@ -54,7 +54,7 @@ class _RisingShareListOfWeekState extends State<RisingShareListOfWeek> {
         actions: const [
           Icon(
             Icons.star,
-            color: Color(0xFFfe9e12),
+            color: starIconColor,
             size: 20,
           ),
         ],

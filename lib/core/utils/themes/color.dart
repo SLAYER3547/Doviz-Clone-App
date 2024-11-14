@@ -14,3 +14,4 @@ const fuelIndicatorColor = Color(0xFF3ff5d6);
 const dieselBackgroundColor = Color(0xFF2c222a);
 const lpgBackgroundColor = Color(0xFF333327);
 const lpgIndicatorColor = Color(0xFFf6ed78);
+const starIconColor = Color(0xFFfe9e12);

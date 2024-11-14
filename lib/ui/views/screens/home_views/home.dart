@@ -4,6 +4,7 @@ import 'package:doviz_clone_app/core/models/onboarding_models/watch_currency_lis
 import 'package:doviz_clone_app/core/models/share_model/share_model.dart';
 import 'package:doviz_clone_app/core/utils/themes/color.dart';
 import 'package:doviz_clone_app/ui/views/auth_views/sign_up_view.dart';
+import 'package:doviz_clone_app/ui/views/screens/converter_view/currency_category_menu.dart';
 import 'package:doviz_clone_app/ui/views/screens/home_views/rising_crypto_list_of_week.dart';
 import 'package:doviz_clone_app/ui/views/screens/home_views/rising_share_list_of_week.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String selectedPriceTimeStampFilter = 'Yıllık';
   String selectedOrderFilter = 'Varsayılan';
   IconData? orderIcon;
+  bool isEditing = false;
 
   final List<String> priceFilterList = ['Alış', 'Satış', 'Son'];
   final List<String> priceTimeStampFilterList = [
@@ -36,6 +38,97 @@ class _HomeScreenState extends State<HomeScreen> {
     'Değişim Oranına Göre Artan',
     'Değişim Oranına Göre Azalan',
   ];
+
+  final List<String> settingList = [
+    'Sembol Ekle',
+    'Düzenle',
+    'Listeler',
+  ];
+
+  final List<String> preferredCurrencyLists = [
+    'Günün Yükselen Dövizleri',
+    'Haftanın Yükselen Dövizleri',
+    'Günün En Çok Kazandıran Kripto Paraları',
+    'Haftanın Yükselen Kripto Paraları',
+    'Günün En Aktif Kripto Paraları',
+    'Haftanın Yükselen Hisseleri',
+    'Günün En Aktif Hisseleri',
+    'En Çok Takip Edilenler',
+  ];
+  IconData updateSettingsIcon(String selectedSettingsFilter) {
+    if (selectedSettingsFilter == 'Sembol Ekle') {
+      return Icons.add;
+    } else if (selectedSettingsFilter == 'Düzenle') {
+      return Icons.edit;
+    } else if (selectedSettingsFilter == 'Listeler') {
+      return Icons.list;
+    } else {
+      return Icons.sort;
+    }
+  }
+
+  void settingsProcesses(String selectedSettingsFilter) {
+    if (selectedSettingsFilter == 'Sembol Ekle') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CurrencyCategoryMenu(),
+        ),
+      );
+    } else if (selectedSettingsFilter == 'Düzenle') {
+      setState(() {
+        isEditing = true;
+      });
+    } else if (selectedSettingsFilter == 'Listeler') {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: const Color(0xFF1a202c),
+        useRootNavigator: true,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Listeler',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: preferredCurrencyLists.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: ListTile(
+                        title: Text(
+                          settingList[index],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        trailing: const Icon(
+                          Icons.star,
+                          color: starIconColor,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
 
   List<WatchCurrencyList> currencyList = WatchCurrencyList.currencyList;
   List<CryptoList> cryptoList = CryptoList.cryptoList;
@@ -79,9 +172,65 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 width: 15,
               ),
-              const Icon(
-                Icons.tune_rounded,
-                color: iconColor,
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: const Color(0xFF1a202c),
+                    useRootNavigator: true,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 70,
+                              height: 2,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            const Text(
+                              'Ayarlar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: settingList.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  leading: Icon(
+                                    updateSettingsIcon(settingList[index]),
+                                    color: iconColor,
+                                  ),
+                                  title: Text(
+                                    settingList[index],
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  onTap: () {
+                                    settingsProcesses(settingList[index]);
+                                    Navigator.pop(context);
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: const Icon(
+                  Icons.tune_rounded,
+                  color: iconColor,
+                ),
               ),
             ],
           ),
@@ -255,7 +404,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   Text(
                                     currencyList[index].currencyName,
-                                    style: const TextStyle(color: defaultTextColor),
+                                    style: const TextStyle(
+                                      color: defaultTextColor,
+                                    ),
                                   ),
                                   const Text(
                                     ' . 09.33',
