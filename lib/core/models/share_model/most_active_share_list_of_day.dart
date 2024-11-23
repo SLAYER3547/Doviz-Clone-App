@@ -1,0 +1,192 @@
+class MostActiveShareListOfDay {
+  MostActiveShareListOfDay(
+    this.shareSymbolName,
+    this.shareName,
+    this.price,
+    this.changedValueOfDay,
+    this.changedValuePercentageOfDay,
+  );
+  late String shareSymbolName;
+  late String shareName;
+  late double price;
+  late double changedValueOfDay;
+  late double changedValuePercentageOfDay;
+
+  static List<MostActiveShareListOfDay> mostActiveShareListOfDay = [
+    MostActiveShareListOfDay(
+      'ISCTR',
+      'IS BANKASI (C)',
+      13.60,
+      0.40,
+      3.03,
+    ),
+    MostActiveShareListOfDay(
+      'YKBNK',
+      'YAPI VE KREDI BANK.',
+      29.20,
+      1.12,
+      3.99,
+    ),
+    MostActiveShareListOfDay(
+      'AKBNK',
+      'AKBANK',
+      60.60,
+      3.70,
+      6.50,
+    ),
+    MostActiveShareListOfDay(
+      'THYAO',
+      'TURK HAVA YOLLARI',
+      279.50,
+      -0.25,
+      -0.09,
+    ),
+    MostActiveShareListOfDay(
+      'KOZAL',
+      'KOZA ALTIN',
+      21.40,
+      -0.16,
+      -0.74,
+    ),
+    MostActiveShareListOfDay(
+      'KCHOL',
+      'KOC HOLDING',
+      194.30,
+      5.70,
+      3.02,
+    ),
+    MostActiveShareListOfDay(
+      'EREGL',
+      'EREGLI DEMIR CELIK',
+      50.10,
+      0.30,
+      0.60,
+    ),
+    MostActiveShareListOfDay(
+      'GARAN',
+      'GARANTI BANKASI',
+      119.50,
+      4.79,
+      4.18,
+    ),
+    MostActiveShareListOfDay(
+      'SASA',
+      'SASA POLYESTER',
+      4.17,
+      0.26,
+      6.65,
+    ),
+    MostActiveShareListOfDay(
+      'GUBRF',
+      'GUBRE FABRIK.',
+      229.50,
+      13.50,
+      6.25,
+    ),
+    MostActiveShareListOfDay(
+      'KOZAA',
+      'KOZA MADENCILIK',
+      75.15,
+      0.45,
+      0.60,
+    ),
+    MostActiveShareListOfDay(
+      'TUPRS',
+      'TUPRAS',
+      146.40,
+      1.51,
+      1.04,
+    ),
+    MostActiveShareListOfDay(
+      'TCELL',
+      'TURKCELL',
+      93.15,
+      -2.85,
+      -2.97,
+    ),
+    MostActiveShareListOfDay(
+      'BIMAS',
+      'BIM MAGAZALAR',
+      468.25,
+      12,
+      2.63,
+    ),
+    MostActiveShareListOfDay(
+      'EKGYO',
+      'EMLAK KONUT GMYO',
+      12.12,
+      0.05,
+      0.41,
+    ),
+    MostActiveShareListOfDay(
+      'ASELS',
+      'ASELSAN',
+      68.50,
+      0.45,
+      0.66,
+    ),
+    MostActiveShareListOfDay(
+      'SAHOL',
+      'SABANCI HOLDING',
+      91.70,
+      5,
+      5.77,
+    ),
+    MostActiveShareListOfDay(
+      'PGSUS',
+      'PEGASUS',
+      221,
+      -0.51,
+      -0.23,
+    ),
+    MostActiveShareListOfDay(
+      'PETKM',
+      'PETKIM',
+      18.35,
+      0.73,
+      4.14,
+    ),
+    MostActiveShareListOfDay(
+      'KRDMD',
+      'KARDEMIR (D)',
+      26.88,
+      0.56,
+      2.13,
+    ),
+    MostActiveShareListOfDay(
+      'IPEKE',
+      'IPEK DOGAL ENERJI',
+      49.60,
+      4.50,
+      9.98,
+    ),
+    MostActiveShareListOfDay(
+      'HEKTS',
+      'HEKTAS',
+      3.81,
+      0.34,
+      9.80,
+    ),
+    MostActiveShareListOfDay(
+      'FROTO',
+      'FORD OTOSAN',
+      1001,
+      -2.01,
+      -0.2,
+    ),
+    MostActiveShareListOfDay(
+      'AEFES',
+      'ANADOLU EFES',
+      212,
+      16.39,
+      8.38,
+    ),
+    MostActiveShareListOfDay(
+      'BSOKE',
+      'BATISOKE CIMENTO',
+      55.10,
+      4.95,
+      9.87,
+    ),
+  ];
+}

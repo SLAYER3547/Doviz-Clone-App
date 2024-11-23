@@ -1,0 +1,136 @@
+class MostActiveCryptoListOfDay {
+  MostActiveCryptoListOfDay(
+    this.cryptoSymbolName,
+    this.cryptoName,
+    this.price,
+    this.changedValueOfDay,
+    this.changedValuePercentageOfDay,
+  );
+  late String cryptoSymbolName;
+  late String cryptoName;
+  late double price;
+  late double changedValueOfDay;
+  late double changedValuePercentageOfDay;
+
+  static List<MostActiveCryptoListOfDay> mostActiveCryptoListOfDay = [
+    MostActiveCryptoListOfDay(
+      'USDT',
+      'Tether',
+      1.001,
+      0.001,
+      0.08,
+    ),
+    MostActiveCryptoListOfDay(
+      'BTC',
+      'Bitcoin',
+      98.716,
+      -21,
+      -0.02,
+    ),
+    MostActiveCryptoListOfDay(
+      'ETH',
+      'Ethereum',
+      3349.41,
+      -25,
+      -0.74,
+    ),
+    MostActiveCryptoListOfDay(
+      'XRP',
+      'Ripple',
+      1.5497,
+      0.1308,
+      9.22,
+    ),
+    MostActiveCryptoListOfDay(
+      'DOGE',
+      'Dogecoin',
+      0.4633,
+      0.07,
+      17.81,
+    ),
+    MostActiveCryptoListOfDay(
+      'USDC',
+      'USD Coin',
+      0.9989,
+      0,
+      0,
+    ),
+    MostActiveCryptoListOfDay(
+      'SOL',
+      'Solana',
+      259.51,
+      0.38,
+      0.15,
+    ),
+    MostActiveCryptoListOfDay(
+      'FDUSD',
+      'First Digital USD',
+      0.9977,
+      0.0001,
+      0.01,
+    ),
+    MostActiveCryptoListOfDay(
+      'ADA',
+      'Cardano',
+      1.0966,
+      0.2134,
+      24.16,
+    ),
+    MostActiveCryptoListOfDay(
+      'XLM',
+      'Stellar',
+      0.4356,
+      0.1471,
+      50.99,
+    ),
+    MostActiveCryptoListOfDay(
+      'PEPE',
+      'Pepe',
+      0.00002134,
+      0.00000002,
+      0.09,
+    ),
+    MostActiveCryptoListOfDay(
+      'SHIB',
+      'Shiba Inu',
+      0.00002688,
+      0.00000197,
+      7.91,
+    ),
+    MostActiveCryptoListOfDay(
+      'PNUT',
+      'Peanut the Squirrel',
+      1.2439,
+      -0.0337,
+      -2.64,
+    ),
+    MostActiveCryptoListOfDay(
+      'AVAX',
+      'Avalanche',
+      43.68,
+      7.47,
+      20.63,
+    ),
+    MostActiveCryptoListOfDay(
+      'BNB',
+      'BNB',
+      650.23,
+      20.30,
+      3.22,
+    ),
+    MostActiveCryptoListOfDay(
+      'LUNR',
+      'LunarCrush',
+      0.04341653,
+      0.01190653,
+      37.79,
+    ),
+    MostActiveCryptoListOfDay(
+      'LTC',
+      'Litecoin',
+      103.94,
+      13.10,
+      14.42,
+    ),
+  ];
+}

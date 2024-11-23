@@ -1,0 +1,192 @@
+class MostSavedCryptoListOfDay {
+  MostSavedCryptoListOfDay(
+    this.cryptoSymbolName,
+    this.cryptoName,
+    this.price,
+    this.changedValueOfDay,
+    this.changedValuePercentageOfDay,
+  );
+  late String cryptoSymbolName;
+  late String cryptoName;
+  late double price;
+  late double changedValueOfDay;
+  late double changedValuePercentageOfDay;
+
+  static List<MostSavedCryptoListOfDay> mostSavedCryptoListOfDay = [
+    MostSavedCryptoListOfDay(
+      'GLR',
+      'Gallery Coin',
+      0.162276,
+      0.110339,
+      212.45,
+    ),
+    MostSavedCryptoListOfDay(
+      'RFR',
+      'Refereum',
+      0.0000847,
+      0.0000519,
+      158.02,
+    ),
+    MostSavedCryptoListOfDay(
+      'BINK',
+      'Big Dog Fink',
+      0.00111431,
+      0.00067123,
+      151.49,
+    ),
+    MostSavedCryptoListOfDay(
+      'QUASAR',
+      'Quasar',
+      0.00452594,
+      0.00252308,
+      125.97,
+    ),
+    MostSavedCryptoListOfDay(
+      'SOLO',
+      'Sologenic',
+      0.611096,
+      0.332209,
+      119.12,
+    ),
+    MostSavedCryptoListOfDay(
+      'TRUMP',
+      'Mog Trump',
+      0.170764,
+      0.072861,
+      74.42,
+    ),
+    MostSavedCryptoListOfDay(
+      'TRIBL',
+      'Tribal Token',
+      0.653322,
+      0.228665,
+      53.85,
+    ),
+    MostSavedCryptoListOfDay(
+      'SCRT',
+      'Secret',
+      0.5245,
+      0.1776,
+      51.20,
+    ),
+    MostSavedCryptoListOfDay(
+      'VINU',
+      'Vita Inu',
+      0.000000038049,
+      0.000000012214,
+      47.27,
+    ),
+    MostSavedCryptoListOfDay(
+      'PDEX',
+      'Polkadex',
+      0.160062,
+      0.051033,
+      46.81,
+    ),
+    MostSavedCryptoListOfDay(
+      'SHDW',
+      'Shadow Token',
+      0.427682,
+      0.133862,
+      45.56,
+    ),
+    MostSavedCryptoListOfDay(
+      'CRE',
+      'Carry',
+      0.00703491,
+      0.00215944,
+      44.29,
+    ),
+    MostSavedCryptoListOfDay(
+      'DMT',
+      'Dream Machine Token',
+      67.64,
+      20.65,
+      43.93,
+    ),
+    MostSavedCryptoListOfDay(
+      'SHR',
+      'Share',
+      0.00247875,
+      0.00070910,
+      40.07,
+    ),
+    MostSavedCryptoListOfDay(
+      'LUNR',
+      'LunarCrush',
+      0.04341653,
+      0.01190653,
+      37.79,
+    ),
+    MostSavedCryptoListOfDay(
+      'TAI',
+      'TARS AI',
+      0.190549,
+      0.049864,
+      35.44,
+    ),
+    MostSavedCryptoListOfDay(
+      'TEL',
+      'Telcoin',
+      0.00361165,
+      0.00089878,
+      33.13,
+    ),
+    MostSavedCryptoListOfDay(
+      'CPH',
+      'Cypherium',
+      0.00669261,
+      0.00158294,
+      30.98,
+    ),
+    MostSavedCryptoListOfDay(
+      'XRP',
+      'Ripple',
+      1.4502,
+      0.3149,
+      27.74,
+    ),
+    MostSavedCryptoListOfDay(
+      'XDEFI',
+      'XDEFI',
+      0.072521,
+      0.015688,
+      27.60,
+    ),
+    MostSavedCryptoListOfDay(
+      'XRP',
+      'HarryPotterObamaPacMan8lnu',
+      1.4441,
+      0.3091,
+      27.23,
+    ),
+    MostSavedCryptoListOfDay(
+      'ETHM',
+      'Ethereum Meta',
+      0.000000000000179025,
+      0.000000000000038292,
+      27.21,
+    ),
+    MostSavedCryptoListOfDay(
+      'NPXS',
+      'Pundi X [OLD]',
+      0.00011112,
+      0.00002202,
+      24.71,
+    ),
+    MostSavedCryptoListOfDay(
+      'PEIPEI',
+      'PeiPei',
+      0.000000152413,
+      0.000000030103,
+      24.61,
+    ),
+    MostSavedCryptoListOfDay(
+      'BTU',
+      'BTU Protocol',
+      0.399099,
+      0.078080,
+      24.32,
+    ),
+  ];
+}
