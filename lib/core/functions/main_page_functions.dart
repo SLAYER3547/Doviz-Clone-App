@@ -1,5 +1,9 @@
+import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_bloc.dart';
+import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_event.dart';
+import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_state.dart';
 import 'package:doviz_clone_app/core/utils/themes/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void showPriceFilterBottomSheet(
   BuildContext context,
@@ -126,19 +130,31 @@ void showPreferredCurrencyListsBottomSheet(
               ),
             ),
             const SizedBox(height: 10),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: itemList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    itemList[index],
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  trailing: const Icon(
-                    Icons.star,
-                    color: starIconColor,
-                  ),
+            BlocBuilder<ListsBloc, ListsState>(
+              builder: (context, state) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: itemList.length,
+                  itemBuilder: (context, index) {
+                    final isVisible = state.visibleLists[index];
+                    return ListTile(
+                      title: Text(
+                        itemList[index],
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          isVisible ? Icons.star : Icons.star_border,
+                          color: starIconColor,
+                        ),
+                        onPressed: () {
+                          context
+                              .read<ListsBloc>()
+                              .add(ToggleListVisibilityEvent(listIndex: index));
+                        },
+                      ),
+                    );
+                  },
                 );
               },
             ),

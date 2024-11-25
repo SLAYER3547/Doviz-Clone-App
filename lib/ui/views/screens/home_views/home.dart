@@ -1,3 +1,6 @@
+// ignore_for_file: must_be_immutable
+import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_bloc.dart';
+import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_state.dart';
 import 'package:doviz_clone_app/core/functions/main_page_functions.dart';
 import 'package:doviz_clone_app/core/models/crypto_model/crypto_model.dart';
 import 'package:doviz_clone_app/core/models/crypto_model/most_active_crypto_list_of_day.dart';
@@ -20,6 +23,7 @@ import 'package:doviz_clone_app/ui/views/screens/home_views/rising_exchanges_lis
 import 'package:doviz_clone_app/ui/views/screens/home_views/rising_exchanges_list_of_week.dart';
 import 'package:doviz_clone_app/ui/views/screens/home_views/rising_share_list_of_week.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -260,973 +264,976 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 15),
-                  width: 60,
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF172e3d),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    'Grafik',
-                    style: TextStyle(color: defaultTextColor),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showPriceFilterBottomSheet(
-                      context,
-                      'Değer',
-                      priceFilterList,
-                      selectedPriceFilter,
-                      (selected) {
-                        setState(() {
-                          selectedPriceFilter = selected;
-                        });
-                      },
-                    );
-                  },
-                  child: Container(
+      body: BlocBuilder<ListsBloc, ListsState>(builder: (context, state) {
+        return CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  Container(
                     margin: const EdgeInsets.only(left: 15),
-                    width: 70,
-                    padding: const EdgeInsets.all(5),
+                    width: 60,
+                    padding: const EdgeInsets.all(7),
                     decoration: BoxDecoration(
                       color: const Color(0xFF172e3d),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          selectedPriceFilter,
-                          style: const TextStyle(color: defaultTextColor),
-                        ),
-                        const Icon(
-                          Icons.arrow_drop_down_outlined,
-                          color: iconColor,
-                        ),
-                      ],
+                    child: const Text(
+                      'Grafik',
+                      style: TextStyle(color: defaultTextColor),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showPriceFilterBottomSheet(
-                      context,
-                      'Fiyat Değişimi',
-                      priceTimeStampFilterList,
-                      selectedPriceTimeStampFilter,
-                      (selected) {
-                        setState(() {
-                          selectedPriceTimeStampFilter = selected;
-                        });
-                      },
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    width: 90,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF172e3d),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          selectedPriceTimeStampFilter,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        const Icon(
-                          Icons.arrow_drop_down_outlined,
-                          color: iconColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showPriceFilterBottomSheet(
-                      context,
-                      'Sıralama',
-                      orderFilterList,
-                      selectedOrderFilter,
-                      (selected) {
-                        setState(() {
-                          selectedOrderFilter = selected;
-                          orderIcon = updateOrderIcon(selectedOrderFilter);
-                        });
-                      },
-                      showIcons: true,
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    width: 110,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF172e3d),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          getOrderText(selectedOrderFilter),
-                          style: const TextStyle(color: defaultTextColor),
-                        ),
-                        Icon(
-                          orderIcon ?? Icons.sort,
-                          color: iconColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Column(
-                  children: [
-                    ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset(
-                          currencyList[index].currencyImage,
-                          width: 40,
-                          height: 40,
-                          fit: BoxFit.cover,
-                        ),
+                  GestureDetector(
+                    onTap: () {
+                      showPriceFilterBottomSheet(
+                        context,
+                        'Değer',
+                        priceFilterList,
+                        selectedPriceFilter,
+                        (selected) {
+                          setState(() {
+                            selectedPriceFilter = selected;
+                          });
+                        },
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 15),
+                      width: 70,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF172e3d),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      title: Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                currencyList[index].currencySymbolName,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    currencyList[index].currencyName,
-                                    style: const TextStyle(
-                                      color: defaultTextColor,
-                                    ),
-                                  ),
-                                  const Text(
-                                    ' . 09.33',
-                                    style: TextStyle(color: defaultTextColor),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          Text(
+                            selectedPriceFilter,
+                            style: const TextStyle(color: defaultTextColor),
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                currencyList[index].price.toString(),
-                                style: const TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    currencyList[index].changedValue.toString(),
-                                    style: const TextStyle(color: Colors.green),
-                                  ),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  Text(
-                                    '%${currencyList[index].changedPercentage}',
-                                    style: const TextStyle(color: Colors.green),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          const Icon(
+                            Icons.arrow_drop_down_outlined,
+                            color: iconColor,
                           ),
                         ],
                       ),
                     ),
-                    const Divider(
-                      color: systemGreyColor,
-                      thickness: 0.5,
-                      indent: 15,
-                      endIndent: 15,
-                    ),
-                  ],
-                );
-              },
-              childCount: currencyList.length,
-            ),
-          ),
-          //Rising exchanges of day
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RisingExchangesListOfDay(),
                   ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Günün Yükselen Dövizleri',
-                      style: TextStyle(color: defaultTextColor, fontSize: 16),
+                  GestureDetector(
+                    onTap: () {
+                      showPriceFilterBottomSheet(
+                        context,
+                        'Fiyat Değişimi',
+                        priceTimeStampFilterList,
+                        selectedPriceTimeStampFilter,
+                        (selected) {
+                          setState(() {
+                            selectedPriceTimeStampFilter = selected;
+                          });
+                        },
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 15),
+                      width: 90,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF172e3d),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedPriceTimeStampFilter,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          const Icon(
+                            Icons.arrow_drop_down_outlined,
+                            color: iconColor,
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(
-                      width: 7,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      showPriceFilterBottomSheet(
+                        context,
+                        'Sıralama',
+                        orderFilterList,
+                        selectedOrderFilter,
+                        (selected) {
+                          setState(() {
+                            selectedOrderFilter = selected;
+                            orderIcon = updateOrderIcon(selectedOrderFilter);
+                          });
+                        },
+                        showIcons: true,
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 15),
+                      width: 110,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF172e3d),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            getOrderText(selectedOrderFilter),
+                            style: const TextStyle(color: defaultTextColor),
+                          ),
+                          Icon(
+                            orderIcon ?? Icons.sort,
+                            color: iconColor,
+                          ),
+                        ],
+                      ),
                     ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: risingExchangesOfDayList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          risingExchangesOfDayList[index].currencyName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.asset(
+                            currencyList[index].currencyImage,
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${risingExchangesOfDayList[index].sellPrice.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              '%${risingExchangesOfDayList[index].changedPercentageOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  currencyList[index].currencySymbolName,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      currencyList[index].currencyName,
+                                      style: const TextStyle(
+                                        color: defaultTextColor,
+                                      ),
+                                    ),
+                                    const Text(
+                                      ' . 09.33',
+                                      style: TextStyle(color: defaultTextColor),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            Text(
-                              '\$${risingExchangesOfDayList[index].changedValueOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
+                            Column(
+                              children: [
+                                Text(
+                                  currencyList[index].price.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      currencyList[index]
+                                          .changedValue
+                                          .toString(),
+                                      style:
+                                          const TextStyle(color: Colors.green),
+                                    ),
+                                    const SizedBox(
+                                      width: 7,
+                                    ),
+                                    Text(
+                                      '%${currencyList[index].changedPercentage}',
+                                      style:
+                                          const TextStyle(color: Colors.green),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      const Divider(
+                        color: systemGreyColor,
+                        thickness: 0.5,
+                        indent: 15,
+                        endIndent: 15,
+                      ),
+                    ],
                   );
                 },
+                childCount: currencyList.length,
               ),
             ),
-          ),
+            if (state.visibleLists[0])
+              _RisingExchangesOfDay(
+                risingExchangesOfDayList: risingExchangesOfDayList,
+              ),
+            if (state.visibleLists[1])
+              _RisingExchangesOfWeek(
+                risingExchangesOfWeekList: risingExchangesOfWeekList,
+              ),
+            if (state.visibleLists[2])
+              _MostSavedCrpytoListOfDay(
+                mostSavedCryptoList: mostSavedCryptoList,
+              ),
+            if (state.visibleLists[3])
+              _RisingCryptoListOfWeek(cryptoList: cryptoList),
+            if (state.visibleLists[4])
+              _MostActiveCryptoListOfDay(
+                mostActiveCryptoList: mostActiveCryptoList,
+              ),
+            if (state.visibleLists[5])
+              _RisingShareListOfWeek(shareList: shareList),
+            if (state.visibleLists[6])
+              _MostActiveShareListOfDay(
+                mostActiveShareList: mostActiveShareList,
+              ),
+            if (state.visibleLists[7])
+              _MostFollowedMoneyList(
+                mostFollowedMoneys: mostFollowedMoneys,
+              ),
+            /*
+            //Rising exchanges of day
+            _RisingExchangesOfDay(
+              risingExchangesOfDayList: risingExchangesOfDayList,
+            ),
+        
+            //Rising exchanges of week
+            _RisingExchangesOfWeek(
+              risingExchangesOfWeekList: risingExchangesOfWeekList,
+            ),
+        
+            //most saved crypto list of day
+            _MostSavedCrpytoListOfDay(mostSavedCryptoList: mostSavedCryptoList),
+        
+            //Rising crpto list of week
+            _RisingCryptoListOfWeek(cryptoList: cryptoList),
+        
+            //most active crypto list of the day
+            _MostActiveCryptoListOfDay(
+              mostActiveCryptoList: mostActiveCryptoList,
+            ),
+        
+            //rising share list of week
+            _RisingShareListOfWeek(shareList: shareList),
+            // most active shares of day list
+            _MostActiveShareListOfDay(mostActiveShareList: mostActiveShareList),
+        
+            //most followed money list
+            _MostFollowedMoneyList(mostFollowedMoneys: mostFollowedMoneys),*/
+          ],
+        );
+      },),
+    );
+  }
+}
 
-          //Rising exchanges of week
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RisingExchangesListOfWeek(),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Haftanın Yükselen Dövizleri',
-                      style: TextStyle(color: defaultTextColor, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+class _ListTitleWidget extends StatelessWidget {
+  const _ListTitleWidget({
+    required this.listTitle,
+    required this.listDetailPage,
+  });
+  final String listTitle;
+  final Widget listDetailPage;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => listDetailPage,
           ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: risingExchangesOfWeekList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          risingExchangesOfWeekList[index].currencyName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${risingExchangesOfWeekList[index].sellPrice.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${risingExchangesOfWeekList[index].changedPercentageOfWeek.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              '\$${risingExchangesOfWeekList[index].changedValueOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
+        child: Row(
+          children: [
+            Text(
+              listTitle,
+              style: const TextStyle(color: defaultTextColor, fontSize: 16),
             ),
-          ),
+            const SizedBox(
+              width: 7,
+            ),
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: iconColor,
+              size: 16,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-          //most saved crypto list of day
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MostSavedCryptoListOfDayPage(),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Günün En Çok Kazandıran Kripto Paraları',
-                      style: TextStyle(color: defaultTextColor, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: mostSavedCryptoList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          mostSavedCryptoList[index].cryptoSymbolName,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${mostSavedCryptoList[index].price.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${mostSavedCryptoList[index].changedValuePercentageOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              '\$${mostSavedCryptoList[index].changedValueOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+class _MostFollowedMoneyList extends StatelessWidget {
+  const _MostFollowedMoneyList({
+    required this.mostFollowedMoneys,
+  });
 
-          //Rising crpto list of week
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RisingCryptoListOfWeek(),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Haftanın Yükselen Kripto Paraları',
-                      style: TextStyle(color: defaultTextColor, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: cryptoList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          cryptoList[index].cryptoSymbolName,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${cryptoList[index].price.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${cryptoList[index].changedValuePercentage.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              '\$${cryptoList[index].changedValue.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+  final List<MostFollowedMoneyList> mostFollowedMoneys;
 
-          //most active crypto list of the day
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'En Çok Takip Edilenler',
+            listDetailPage: MostFolloweMoneyPage(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: mostFollowedMoneys.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        mostFollowedMoneys[index].moneySymbolName,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${mostFollowedMoneys[index].moneyPrice.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${mostFollowedMoneys[index].changedValuePercentageOfMoney.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${mostFollowedMoneys[index].changedValueOfMoney.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MostActiveCryptoListOfDayPage(),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Günün En Aktif Kripto Paraları',
-                      style: TextStyle(color: defaultTextColor, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: mostActiveCryptoList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          mostActiveCryptoList[index].cryptoSymbolName,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${mostActiveCryptoList[index].price.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${mostActiveCryptoList[index].changedValuePercentageOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              '\$${mostActiveCryptoList[index].changedValueOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+class _MostActiveShareListOfDay extends StatelessWidget {
+  const _MostActiveShareListOfDay({
+    required this.mostActiveShareList,
+  });
 
-          //rising share list of week
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RisingShareListOfWeek(),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Haftanın Yükselen Hisseleri',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: shareList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          shareList[index].shareSymbolName,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${shareList[index].price.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${shareList[index].changedValuePercentage.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              '\$${shareList[index].changedValue.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          // most active shares of day list
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MostActiveShareListOfDayPage(),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Günün En Aktif Hisseleri',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: mostActiveShareList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          mostActiveShareList[index].shareSymbolName,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${mostActiveShareList[index].price.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${mostActiveShareList[index].changedValuePercentageOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              '\$${mostActiveShareList[index].changedValueOfDay.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+  final List<MostActiveShareListOfDay> mostActiveShareList;
 
-          //most followed money list
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MostFolloweMoneyPage(),
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Günün En Aktif Hisseleri',
+            listDetailPage: MostActiveShareListOfDayPage(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: mostActiveShareList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        mostActiveShareList[index].shareSymbolName,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${mostActiveShareList[index].price.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${mostActiveShareList[index].changedValuePercentageOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${mostActiveShareList[index].changedValueOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 );
               },
-              child: Container(
-                margin: const EdgeInsets.only(left: 17, top: 20, bottom: 10),
-                child: const Row(
-                  children: [
-                    Text(
-                      'En Çok Takip Edilenler',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: iconColor,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: mostFollowedMoneys.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 120,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xf222222d),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          mostFollowedMoneys[index].moneySymbolName,
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RisingShareListOfWeek extends StatelessWidget {
+  const _RisingShareListOfWeek({
+    required this.shareList,
+  });
+
+  final List<ShareList> shareList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Haftanın Yükselen Hisseleri',
+            listDetailPage: RisingShareListOfWeek(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: shareList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        shareList[index].shareSymbolName,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${mostFollowedMoneys[index].moneyPrice.toStringAsFixed(6)}',
-                          style: const TextStyle(
-                            color: defaultTextColor,
-                            fontSize: 14,
-                          ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${shareList[index].price.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
                         ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '%${mostFollowedMoneys[index].changedValuePercentageOfMoney.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${shareList[index].changedValuePercentage.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
                             ),
-                            Text(
-                              '\$${mostFollowedMoneys[index].changedValueOfMoney.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 12,
-                              ),
+                          ),
+                          Text(
+                            '\$${shareList[index].changedValue.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MostActiveCryptoListOfDay extends StatelessWidget {
+  const _MostActiveCryptoListOfDay({
+    required this.mostActiveCryptoList,
+  });
+
+  final List<MostActiveCryptoListOfDay> mostActiveCryptoList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Günün En Aktif Kripto Paraları',
+            listDetailPage: MostActiveCryptoListOfDayPage(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: mostActiveCryptoList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        mostActiveCryptoList[index].cryptoSymbolName,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${mostActiveCryptoList[index].price.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${mostActiveCryptoList[index].changedValuePercentageOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${mostActiveCryptoList[index].changedValueOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RisingCryptoListOfWeek extends StatelessWidget {
+  const _RisingCryptoListOfWeek({
+    required this.cryptoList,
+  });
+
+  final List<CryptoList> cryptoList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Haftanın Yükselen Kripto Paraları',
+            listDetailPage: RisingCryptoListOfWeek(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: cryptoList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        cryptoList[index].cryptoSymbolName,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${cryptoList[index].price.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${cryptoList[index].changedValuePercentage.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${cryptoList[index].changedValue.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MostSavedCrpytoListOfDay extends StatelessWidget {
+  const _MostSavedCrpytoListOfDay({
+    required this.mostSavedCryptoList,
+  });
+
+  final List<MostSavedCryptoListOfDay> mostSavedCryptoList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Günün En Çok Kazandıran Kripto Paraları',
+            listDetailPage: MostSavedCryptoListOfDayPage(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: mostSavedCryptoList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        mostSavedCryptoList[index].cryptoSymbolName,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${mostSavedCryptoList[index].price.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${mostSavedCryptoList[index].changedValuePercentageOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${mostSavedCryptoList[index].changedValueOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RisingExchangesOfWeek extends StatelessWidget {
+  _RisingExchangesOfWeek({
+    required this.risingExchangesOfWeekList,
+  });
+
+  // ignore: type_annotate_public_apis
+  var risingExchangesOfWeekList = risingExchangesOfWeek;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Haftanın Yükselen Dövizleri',
+            listDetailPage: RisingExchangesListOfWeek(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: risingExchangesOfWeekList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        risingExchangesOfWeekList[index].currencyName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${risingExchangesOfWeekList[index].sellPrice.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${risingExchangesOfWeekList[index].changedPercentageOfWeek.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${risingExchangesOfWeekList[index].changedValueOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RisingExchangesOfDay extends StatelessWidget {
+  _RisingExchangesOfDay({
+    required this.risingExchangesOfDayList,
+  });
+
+  // ignore: type_annotate_public_apis
+  var risingExchangesOfDayList = risingExchangesOfDay;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const _ListTitleWidget(
+            listTitle: 'Günün Yükselen Dövizleri',
+            listDetailPage: RisingExchangesListOfDay(),
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: risingExchangesOfDayList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 120,
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xf222222d),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        risingExchangesOfDayList[index].currencyName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${risingExchangesOfDayList[index].sellPrice.toStringAsFixed(6)}',
+                        style: const TextStyle(
+                          color: defaultTextColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            '%${risingExchangesOfDayList[index].changedPercentageOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            '\$${risingExchangesOfDayList[index].changedValueOfDay.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              color: Colors.green,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
         ],
