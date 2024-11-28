@@ -13,6 +13,7 @@ class CurrencyCategoryMenu extends StatefulWidget {
 
 class _CurrencyCategoryMenuState extends State<CurrencyCategoryMenu> {
   TextEditingController currencyController = TextEditingController();
+  String searchQuery = '';
 
   final Map<String, bool> _expandedCategories = {
     'Döviz': false,
@@ -27,6 +28,17 @@ class _CurrencyCategoryMenuState extends State<CurrencyCategoryMenu> {
   @override
   void initState() {
     super.initState();
+    currencyController.addListener(() {
+      setState(() {
+        searchQuery = currencyController.text.toLowerCase();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    currencyController.dispose();
+    super.dispose();
   }
 
   @override
@@ -83,18 +95,23 @@ class _CurrencyCategoryMenuState extends State<CurrencyCategoryMenu> {
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          _buildCategoryTile('Döviz', CurrencyCategory.exchange),
-          _buildCategoryTile('Altın', CurrencyCategory.gold),
-          _buildCategoryTile(
-            'Kapalıçarşı&Döviz Büroları',
-            CurrencyCategory.grandBazaar,
-          ),
-          _buildCategoryTile('Bankalar', CurrencyCategory.banks),
-          _buildCategoryTile('Kripto Paralar', CurrencyCategory.cryptoMoney),
-        ],
-      ),
+      body: searchQuery.isEmpty
+          ? ListView(
+              children: [
+                _buildCategoryTile('Döviz', CurrencyCategory.exchange),
+                _buildCategoryTile('Altın', CurrencyCategory.gold),
+                _buildCategoryTile(
+                  'Kapalıçarşı&Döviz Büroları',
+                  CurrencyCategory.grandBazaar,
+                ),
+                _buildCategoryTile('Bankalar', CurrencyCategory.banks),
+                _buildCategoryTile(
+                  'Kripto Paralar',
+                  CurrencyCategory.cryptoMoney,
+                ),
+              ],
+            )
+          : _buildSearchResults(),
     );
   }
 
@@ -147,55 +164,82 @@ class _CurrencyCategoryMenuState extends State<CurrencyCategoryMenu> {
           itemCount: filteredList.length,
           itemBuilder: (context, index) {
             final currency = filteredList[index];
-            return ListTile(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.network(
-                          currency.currencyImage,
-                          width: 30,
-                          height: 30,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            currency.currencySymbolName,
-                            style: const TextStyle(
-                              color: defaultTextColor,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            currency.currencyName,
-                            style: const TextStyle(
-                              color: systemGreyColor,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  if (currency.isSelected)
-                    const Icon(
-                      Icons.check,
-                      color: systemGreyColor,
-                    ),
-                ],
-              ),
-              onTap: () {
-                context.read<CurrencyListCubit>().toggleIsSelected(currency);
-              },
-            );
+            return _buildCurrencyTile(currency);
           },
         );
+      },
+    );
+  }
+
+  Widget _buildSearchResults() {
+    return BlocBuilder<CurrencyListCubit, CurrencyListState>(
+      builder: (context, state) {
+        final searchResults = state.currencyList.where((currency) {
+          return currency.currencyName.toLowerCase().contains(searchQuery) ||
+              currency.currencySymbolName.toLowerCase().contains(searchQuery);
+        }).toList();
+
+        if (searchResults.isEmpty) {
+          return const SizedBox();
+        }
+
+        return ListView.builder(
+          itemCount: searchResults.length,
+          itemBuilder: (context, index) {
+            final currency = searchResults[index];
+            return _buildCurrencyTile(currency);
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildCurrencyTile(Currency currency) {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  currency.currencyImage,
+                  width: 30,
+                  height: 30,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    currency.currencySymbolName,
+                    style: const TextStyle(
+                      color: defaultTextColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    currency.currencyName,
+                    style: const TextStyle(
+                      color: systemGreyColor,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          if (currency.isSelected)
+            const Icon(
+              Icons.check,
+              color: systemGreyColor,
+            ),
+        ],
+      ),
+      onTap: () {
+        context.read<CurrencyListCubit>().toggleIsSelected(currency);
       },
     );
   }

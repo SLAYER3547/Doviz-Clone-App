@@ -1,34 +1,34 @@
-import 'package:doviz_clone_app/core/bloc/currency_list_bloc/currency_list_cubit.dart';
-import 'package:doviz_clone_app/core/models/currency_model/currency_model.dart';
+import 'package:doviz_clone_app/core/bloc/currency_list_bloc/home_currency_list_cubit.dart';
+import 'package:doviz_clone_app/core/models/currency_model/home_currency_model.dart';
 import 'package:doviz_clone_app/core/utils/themes/color.dart';
-import 'package:doviz_clone_app/ui/views/screens/converter_view/currency_category_menu.dart';
+import 'package:doviz_clone_app/ui/views/screens/home_views/home_search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CurrencyConverterPage extends StatefulWidget {
-  const CurrencyConverterPage({super.key});
+class HomeCurrencyList extends StatefulWidget {
+  const HomeCurrencyList({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _CurrencyConverterPageState createState() => _CurrencyConverterPageState();
+  _HomeCurrencyListState createState() => _HomeCurrencyListState();
 }
 
-class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
+class _HomeCurrencyListState extends State<HomeCurrencyList> {
   String priceType = 'last';
   String printedPriceType = '';
-  List<Currency> displayedCurrencies =
-      List.from(currencies.where((e) => e.isSelected == true));
+  List<HomeCurrency> displayedCurrencies =
+      List.from(homeCurrencies.where((e) => e.isSelected == true));
   Map<String, TextEditingController> amountControllers = {};
   Map<String, FocusNode> focusNodes = {};
   bool isEditMode = false;
-  List<Currency> editableCurrencyList = [];
+  List<HomeCurrency> editableCurrencyList = [];
 
   @override
   void initState() {
     super.initState();
     initializeControllers();
-    final cubit = context.read<CurrencyListCubit>();
-    editableCurrencyList = cubit.state.currencyList
+    final cubit = context.read<HomeCurrencyListCubit>();
+    editableCurrencyList = cubit.state.homeCurrencyList
         .where((currency) => currency.isSelected)
         .toList();
   }
@@ -61,7 +61,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     _updateAllValues();
   }
 
-  void addCurrency(Currency currency) {
+  void addCurrency(HomeCurrency currency) {
     setState(() {
       displayedCurrencies.add(currency);
       amountControllers.putIfAbsent(
@@ -77,7 +77,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const CurrencyCategoryMenu(),
+        builder: (context) => const HomeSearchView(),
       ),
     );
   }
@@ -104,7 +104,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       for (final currency in displayedCurrencies) {
         if (currency.currencyName != currencyName) {
           final convertedAmount = (amount *
-                  currencies
+                  homeCurrencies
                       .firstWhere((c) => c.currencyName == currencyName)
                       .getPrice(priceType)) /
               currency.getPrice(priceType);
@@ -230,9 +230,9 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
             ],
           ),
           Expanded(
-            child: BlocBuilder<CurrencyListCubit, CurrencyListState>(
+            child: BlocBuilder<HomeCurrencyListCubit, HomeCurrencyListState>(
               builder: (context, state) {
-                editableCurrencyList = state.currencyList
+                editableCurrencyList = state.homeCurrencyList
                     .where((currency) => currency.isSelected)
                     .toList();
                 return isEditMode
@@ -306,7 +306,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                                     onPressed: () {
                                       // Make the item invisible
                                       context
-                                          .read<CurrencyListCubit>()
+                                          .read<HomeCurrencyListCubit>()
                                           .hideCurrency(currency);
                                     },
                                   ),
@@ -317,16 +317,16 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                         }).toList(),
                         onReorder: (oldIndex, newIndex) {
                           context
-                              .read<CurrencyListCubit>()
+                              .read<HomeCurrencyListCubit>()
                               .reorderCurrencies(oldIndex, newIndex);
                         },
                       )
                     : ListView.builder(
-                        itemCount: state.currencyList
+                        itemCount: state.homeCurrencyList
                             .where((c) => c.isSelected)
                             .length,
                         itemBuilder: (context, index) {
-                          final currency = state.currencyList
+                          final currency = state.homeCurrencyList
                               .where((c) => c.isSelected)
                               .toList()[index];
                           final focusNode = focusNodes[currency.currencyName];
@@ -347,7 +347,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                                 children: [
                                   Row(
                                     children: [
-                                      ClipRRect(
+                                      /*ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         child: Image.network(
@@ -355,7 +355,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                                           width: 40,
                                           height: 40,
                                         ),
-                                      ),
+                                      ),*/
                                       const SizedBox(width: 10),
                                       Column(
                                         crossAxisAlignment:
@@ -399,8 +399,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                                       ),
                                       keyboardType: TextInputType.number,
                                       style: const TextStyle(
-                                        color: defaultTextColor,
-                                      ),
+                                          color: defaultTextColor,),
                                       textAlign: TextAlign.right,
                                       onTap: () {
                                         if (amountControllers[

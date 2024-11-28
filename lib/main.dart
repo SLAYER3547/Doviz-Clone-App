@@ -1,5 +1,6 @@
 import 'package:doviz_clone_app/core/bloc/currency_list_bloc/confidentiality_agreement_bloc/agreement_bloc.dart';
 import 'package:doviz_clone_app/core/bloc/currency_list_bloc/currency_list_cubit.dart';
+import 'package:doviz_clone_app/core/bloc/currency_list_bloc/home_currency_list_cubit.dart';
 import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_bloc.dart';
 import 'package:doviz_clone_app/core/bloc/notification_settings_bloc/notification_bloc.dart';
 import 'package:doviz_clone_app/core/utils/routing/router.dart';
@@ -20,7 +21,8 @@ class MainRoot extends StatelessWidget {
         BlocProvider(create: (_)=>AgeConsentBloc()),
         BlocProvider(create: (_)=>CurrencyListCubit()),
         BlocProvider(create: (_)=>CheckboxBloc()),
-        BlocProvider(create: (_)=>ListsBloc())
+        BlocProvider(create: (_)=>ListsBloc()),
+        BlocProvider(create: (_)=>HomeCurrencyListCubit())
       ,],
       child: MaterialApp.router(
         routerConfig: router,

@@ -1,10 +1,12 @@
 // ignore_for_file: must_be_immutable
+import 'package:doviz_clone_app/core/bloc/currency_list_bloc/home_currency_list_cubit.dart';
 import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_bloc.dart';
 import 'package:doviz_clone_app/core/bloc/home_lists_bloc/lists_state.dart';
 import 'package:doviz_clone_app/core/functions/main_page_functions.dart';
 import 'package:doviz_clone_app/core/models/crypto_model/crypto_model.dart';
 import 'package:doviz_clone_app/core/models/crypto_model/most_active_crypto_list_of_day.dart';
 import 'package:doviz_clone_app/core/models/crypto_model/most_saved_crypto_list_of_day.dart';
+import 'package:doviz_clone_app/core/models/currency_model/home_currency_model.dart';
 import 'package:doviz_clone_app/core/models/most_followed_money_list/most_followed_money_list.dart';
 import 'package:doviz_clone_app/core/models/onboarding_models/watch_currency_list_model.dart';
 import 'package:doviz_clone_app/core/models/rising_exchanges_model/rising_exchanges_model.dart';
@@ -13,7 +15,7 @@ import 'package:doviz_clone_app/core/models/share_model/most_active_share_list_o
 import 'package:doviz_clone_app/core/models/share_model/share_model.dart';
 import 'package:doviz_clone_app/core/utils/themes/color.dart';
 import 'package:doviz_clone_app/ui/views/auth_views/sign_up_view.dart';
-import 'package:doviz_clone_app/ui/views/screens/converter_view/currency_category_menu.dart';
+import 'package:doviz_clone_app/ui/views/screens/home_views/home_search_view.dart';
 import 'package:doviz_clone_app/ui/views/screens/home_views/most_active_crypto_list_of_day.dart';
 import 'package:doviz_clone_app/ui/views/screens/home_views/most_active_share_list_of_day_page.dart';
 import 'package:doviz_clone_app/ui/views/screens/home_views/most_followed_money_list.dart';
@@ -110,6 +112,19 @@ class _HomeScreenState extends State<HomeScreen> {
   final mostActiveCryptoList =
       MostActiveCryptoListOfDay.mostActiveCryptoListOfDay;
   final mostActiveShareList = MostActiveShareListOfDay.mostActiveShareListOfDay;
+  List<HomeCurrency> displayedCurrencies =
+      List.from(homeCurrencies.where((e) => e.isSelected == true));
+  List<HomeCurrency> editableCurrencyList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (displayedCurrencies.isEmpty) return;
+    final cubit = context.read<HomeCurrencyListCubit>();
+    editableCurrencyList = cubit.state.homeCurrencyList
+        .where((currency) => currency.isSelected)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +140,18 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Row(
             children: [
-              const Icon(
-                Icons.search,
-                color: iconColor,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeSearchView(),
+                      ),);
+                },
+                child: const Icon(
+                  Icons.search,
+                  color: iconColor,
+                ),
               ),
               const SizedBox(
                 width: 15,
@@ -192,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const CurrencyCategoryMenu(),
+                                        const HomeSearchView(),
                                   ),
                                 );
                               },
@@ -264,293 +288,417 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: BlocBuilder<ListsBloc, ListsState>(builder: (context, state) {
-        return CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    width: 60,
-                    padding: const EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF172e3d),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Text(
-                      'Grafik',
-                      style: TextStyle(color: defaultTextColor),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showPriceFilterBottomSheet(
-                        context,
-                        'Değer',
-                        priceFilterList,
-                        selectedPriceFilter,
-                        (selected) {
-                          setState(() {
-                            selectedPriceFilter = selected;
-                          });
-                        },
-                      );
-                    },
-                    child: Container(
+      body: BlocBuilder<ListsBloc, ListsState>(
+        builder: (context, state) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Row(
+                  children: [
+                    Container(
                       margin: const EdgeInsets.only(left: 15),
-                      width: 70,
-                      padding: const EdgeInsets.all(5),
+                      width: 60,
+                      padding: const EdgeInsets.all(7),
                       decoration: BoxDecoration(
                         color: const Color(0xFF172e3d),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            selectedPriceFilter,
-                            style: const TextStyle(color: defaultTextColor),
-                          ),
-                          const Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: iconColor,
-                          ),
-                        ],
+                      child: const Text(
+                        'Grafik',
+                        style: TextStyle(color: defaultTextColor),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showPriceFilterBottomSheet(
-                        context,
-                        'Fiyat Değişimi',
-                        priceTimeStampFilterList,
-                        selectedPriceTimeStampFilter,
-                        (selected) {
-                          setState(() {
-                            selectedPriceTimeStampFilter = selected;
-                          });
-                        },
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 15),
-                      width: 90,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF172e3d),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            selectedPriceTimeStampFilter,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          const Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: iconColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showPriceFilterBottomSheet(
-                        context,
-                        'Sıralama',
-                        orderFilterList,
-                        selectedOrderFilter,
-                        (selected) {
-                          setState(() {
-                            selectedOrderFilter = selected;
-                            orderIcon = updateOrderIcon(selectedOrderFilter);
-                          });
-                        },
-                        showIcons: true,
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 15),
-                      width: 110,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF172e3d),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            getOrderText(selectedOrderFilter),
-                            style: const TextStyle(color: defaultTextColor),
-                          ),
-                          Icon(
-                            orderIcon ?? Icons.sort,
-                            color: iconColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.asset(
-                            currencyList[index].currencyImage,
-                            width: 40,
-                            height: 40,
-                            fit: BoxFit.cover,
-                          ),
+                    GestureDetector(
+                      onTap: () {
+                        showPriceFilterBottomSheet(
+                          context,
+                          'Değer',
+                          priceFilterList,
+                          selectedPriceFilter,
+                          (selected) {
+                            setState(() {
+                              selectedPriceFilter = selected;
+                            });
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 15),
+                        width: 70,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF172e3d),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        title: Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  currencyList[index].currencySymbolName,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      currencyList[index].currencyName,
-                                      style: const TextStyle(
-                                        color: defaultTextColor,
-                                      ),
-                                    ),
-                                    const Text(
-                                      ' . 09.33',
-                                      style: TextStyle(color: defaultTextColor),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            Text(
+                              selectedPriceFilter,
+                              style: const TextStyle(color: defaultTextColor),
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  currencyList[index].price.toString(),
-                                  style: const TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      currencyList[index]
-                                          .changedValue
-                                          .toString(),
-                                      style:
-                                          const TextStyle(color: Colors.green),
-                                    ),
-                                    const SizedBox(
-                                      width: 7,
-                                    ),
-                                    Text(
-                                      '%${currencyList[index].changedPercentage}',
-                                      style:
-                                          const TextStyle(color: Colors.green),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            const Icon(
+                              Icons.arrow_drop_down_outlined,
+                              color: iconColor,
                             ),
                           ],
                         ),
                       ),
-                      const Divider(
-                        color: systemGreyColor,
-                        thickness: 0.5,
-                        indent: 15,
-                        endIndent: 15,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        showPriceFilterBottomSheet(
+                          context,
+                          'Fiyat Değişimi',
+                          priceTimeStampFilterList,
+                          selectedPriceTimeStampFilter,
+                          (selected) {
+                            setState(() {
+                              selectedPriceTimeStampFilter = selected;
+                            });
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 15),
+                        width: 90,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF172e3d),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              selectedPriceTimeStampFilter,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            const Icon(
+                              Icons.arrow_drop_down_outlined,
+                              color: iconColor,
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        showPriceFilterBottomSheet(
+                          context,
+                          'Sıralama',
+                          orderFilterList,
+                          selectedOrderFilter,
+                          (selected) {
+                            setState(() {
+                              selectedOrderFilter = selected;
+                              orderIcon = updateOrderIcon(selectedOrderFilter);
+                            });
+                          },
+                          showIcons: true,
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 15),
+                        width: 110,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF172e3d),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              getOrderText(selectedOrderFilter),
+                              style: const TextStyle(color: defaultTextColor),
+                            ),
+                            Icon(
+                              orderIcon ?? Icons.sort,
+                              color: iconColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              BlocBuilder<HomeCurrencyListCubit, HomeCurrencyListState>(
+                builder: (context, state) {
+                  editableCurrencyList = state.homeCurrencyList
+                      .where((currency) => currency.isSelected)
+                      .toList();
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        // Yeni Bloc için liste öğeleri
+                        return Column(
+                          children: [
+                            ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  editableCurrencyList[index].currencyImage,
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        editableCurrencyList[index]
+                                            .currencySymbolName,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                10 *
+                                                3.5,
+                                            child: Text(
+                                              editableCurrencyList[index]
+                                                  .currencyName,
+                                              style: const TextStyle(
+                                                color: systemGreyColor,
+                                                fontSize: 14,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          const Text(
+                                            ' . 09.33',
+                                            style: TextStyle(
+                                              color: systemGreyColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                10 *
+                                                1.5,
+                                        child: Text(
+                                          editableCurrencyList[index]
+                                              .sellPrice
+                                              .toString(),
+                                          style: const TextStyle(
+                                            color: defaultTextColor,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            editableCurrencyList[index]
+                                                .buyPrice
+                                                .toString(),
+                                            style: const TextStyle(
+                                              color: Colors.green,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 7,
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                10 *
+                                                1,
+                                            child: Text(
+                                              '%${editableCurrencyList[index].sellPrice}',
+                                              style: const TextStyle(
+                                                color: Colors.green,
+                                                fontSize: 12,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Divider(
+                              color: systemGreyColor,
+                              thickness: 0.5,
+                              indent: 15,
+                              endIndent: 15,
+                            ),
+                          ],
+                        );
+                      },
+                      childCount: editableCurrencyList.length,
+                    ),
                   );
                 },
-                childCount: currencyList.length,
               ),
-            ),
-            if (state.visibleLists[0])
-              _RisingExchangesOfDay(
-                risingExchangesOfDayList: risingExchangesOfDayList,
-              ),
-            if (state.visibleLists[1])
-              _RisingExchangesOfWeek(
-                risingExchangesOfWeekList: risingExchangesOfWeekList,
-              ),
-            if (state.visibleLists[2])
-              _MostSavedCrpytoListOfDay(
-                mostSavedCryptoList: mostSavedCryptoList,
-              ),
-            if (state.visibleLists[3])
-              _RisingCryptoListOfWeek(cryptoList: cryptoList),
-            if (state.visibleLists[4])
-              _MostActiveCryptoListOfDay(
-                mostActiveCryptoList: mostActiveCryptoList,
-              ),
-            if (state.visibleLists[5])
-              _RisingShareListOfWeek(shareList: shareList),
-            if (state.visibleLists[6])
-              _MostActiveShareListOfDay(
-                mostActiveShareList: mostActiveShareList,
-              ),
-            if (state.visibleLists[7])
-              _MostFollowedMoneyList(
-                mostFollowedMoneys: mostFollowedMoneys,
-              ),
-            /*
-            //Rising exchanges of day
-            _RisingExchangesOfDay(
-              risingExchangesOfDayList: risingExchangesOfDayList,
-            ),
-        
-            //Rising exchanges of week
-            _RisingExchangesOfWeek(
-              risingExchangesOfWeekList: risingExchangesOfWeekList,
-            ),
-        
-            //most saved crypto list of day
-            _MostSavedCrpytoListOfDay(mostSavedCryptoList: mostSavedCryptoList),
-        
-            //Rising crpto list of week
-            _RisingCryptoListOfWeek(cryptoList: cryptoList),
-        
-            //most active crypto list of the day
-            _MostActiveCryptoListOfDay(
-              mostActiveCryptoList: mostActiveCryptoList,
-            ),
-        
-            //rising share list of week
-            _RisingShareListOfWeek(shareList: shareList),
-            // most active shares of day list
-            _MostActiveShareListOfDay(mostActiveShareList: mostActiveShareList),
-        
-            //most followed money list
-            _MostFollowedMoneyList(mostFollowedMoneys: mostFollowedMoneys),*/
-          ],
-        );
-      },),
+              /*SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset(
+                              currencyList[index].currencyImage,
+                              width: 40,
+                              height: 40,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    currencyList[index].currencySymbolName,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        currencyList[index].currencyName,
+                                        style: const TextStyle(
+                                          color: defaultTextColor,
+                                        ),
+                                      ),
+                                      const Text(
+                                        ' . 09.33',
+                                        style:
+                                            TextStyle(color: defaultTextColor),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    currencyList[index].price.toString(),
+                                    style: const TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        currencyList[index]
+                                            .changedValue
+                                            .toString(),
+                                        style: const TextStyle(
+                                            color: Colors.green,),
+                                      ),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text(
+                                        '%${currencyList[index].changedPercentage}',
+                                        style: const TextStyle(
+                                            color: Colors.green,),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(
+                          color: systemGreyColor,
+                          thickness: 0.5,
+                          indent: 15,
+                          endIndent: 15,
+                        ),
+                      ],
+                    );
+                  },
+                  childCount: currencyList.length,
+                ),
+              ),*/
+              /*GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeCurrencyList(),),);
+                },
+                child: const Text(
+                  'Aç',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),*/
+              if (state.visibleLists[0])
+                _RisingExchangesOfDay(
+                  risingExchangesOfDayList: risingExchangesOfDayList,
+                ),
+              if (state.visibleLists[1])
+                _RisingExchangesOfWeek(
+                  risingExchangesOfWeekList: risingExchangesOfWeekList,
+                ),
+              if (state.visibleLists[2])
+                _MostSavedCrpytoListOfDay(
+                  mostSavedCryptoList: mostSavedCryptoList,
+                ),
+              if (state.visibleLists[3])
+                _RisingCryptoListOfWeek(cryptoList: cryptoList),
+              if (state.visibleLists[4])
+                _MostActiveCryptoListOfDay(
+                  mostActiveCryptoList: mostActiveCryptoList,
+                ),
+              if (state.visibleLists[5])
+                _RisingShareListOfWeek(shareList: shareList),
+              if (state.visibleLists[6])
+                _MostActiveShareListOfDay(
+                  mostActiveShareList: mostActiveShareList,
+                ),
+              if (state.visibleLists[7])
+                _MostFollowedMoneyList(
+                  mostFollowedMoneys: mostFollowedMoneys,
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
