@@ -138,121 +138,125 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 80,
         ),
         actions: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
+          if (!isEditing)
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomeSearchView(),
-                      ),);
-                },
-                child: const Icon(
-                  Icons.search,
-                  color: iconColor,
+                      ),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.search,
+                    color: iconColor,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignUpView(),
-                    ),
-                  );
-                },
-                child: const Icon(
-                  Icons.wallet,
-                  color: iconColor,
+                const SizedBox(
+                  width: 15,
                 ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: const Color(0xFF1a202c),
-                    useRootNavigator: true,
-                    builder: (BuildContext context) {
-                      return Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 2,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpView(),
+                      ),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.wallet,
+                    color: iconColor,
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: const Color(0xFF1a202c),
+                      useRootNavigator: true,
+                      builder: (BuildContext context) {
+                        return Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 70,
+                                height: 2,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
                               ),
-                            ),
-                            const Text(
-                              'Ayarlar',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
+                              const Text(
+                                'Ayarlar',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.add,
-                                color: iconColor,
+                              const SizedBox(height: 10),
+                              ListTile(
+                                leading: const Icon(
+                                  Icons.add,
+                                  color: iconColor,
+                                ),
+                                title: const Text(
+                                  'Sembol Ekle',
+                                  style: TextStyle(color: defaultTextColor),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomeSearchView(),
+                                    ),
+                                  );
+                                  
+                                },
                               ),
-                              title: const Text(
-                                'Sembol Ekle',
-                                style: TextStyle(color: defaultTextColor),
+                              ListTile(
+                                leading: const Icon(
+                                  Icons.edit,
+                                  color: iconColor,
+                                ),
+                                title: const Text(
+                                  'Düzenle',
+                                  style: TextStyle(color: defaultTextColor),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    isEditing = true;
+                                  });
+                                  Navigator.pop(context);
+                                },
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const HomeSearchView(),
-                                  ),
-                                );
-                              },
-                            ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.edit,
-                                color: iconColor,
+                              ListTile(
+                                leading: const Icon(
+                                  Icons.list,
+                                  color: iconColor,
+                                ),
+                                title: const Text(
+                                  'Listeler',
+                                  style: TextStyle(color: defaultTextColor),
+                                ),
+                                onTap: () {
+                                  showPreferredCurrencyListsBottomSheet(
+                                    context,
+                                    preferredCurrencyLists,
+                                  );
+                                },
                               ),
-                              title: const Text(
-                                'Düzenle',
-                                style: TextStyle(color: defaultTextColor),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  isEditing = true;
-                                });
-                              },
-                            ),
-                            ListTile(
-                              leading: const Icon(
-                                Icons.list,
-                                color: iconColor,
-                              ),
-                              title: const Text(
-                                'Listeler',
-                                style: TextStyle(color: defaultTextColor),
-                              ),
-                              onTap: () {
-                                showPreferredCurrencyListsBottomSheet(
-                                  context,
-                                  preferredCurrencyLists,
-                                );
-                              },
-                            ),
-                            /*ListView.builder(
+                              /*ListView.builder(
                               shrinkWrap: true,
                               itemCount: settingList.length,
                               itemBuilder: (context, index) {
@@ -273,167 +277,368 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                             ),*/
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: const Icon(
-                  Icons.tune_rounded,
-                  color: iconColor,
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: const Icon(
+                    Icons.tune_rounded,
+                    color: iconColor,
+                  ),
                 ),
+              ],
+            ),
+          if (isEditing)
+            IconButton(
+              icon: const Icon(
+                Icons.check,
+                color: iconColor,
               ),
-            ],
-          ),
+              onPressed: () {
+                context.read<HomeCurrencyListCubit>().updateListOrder(
+                      context
+                          .read<HomeCurrencyListCubit>()
+                          .state
+                          .homeCurrencyList,
+                    );
+                setState(() {
+                  isEditing = false;
+                });
+              },
+            ),
         ],
       ),
       body: BlocBuilder<ListsBloc, ListsState>(
         builder: (context, state) {
           return CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 15),
-                      width: 60,
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF172e3d),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Text(
-                        'Grafik',
-                        style: TextStyle(color: defaultTextColor),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showPriceFilterBottomSheet(
-                          context,
-                          'Değer',
-                          priceFilterList,
-                          selectedPriceFilter,
-                          (selected) {
-                            setState(() {
-                              selectedPriceFilter = selected;
-                            });
-                          },
-                        );
-                      },
-                      child: Container(
+              if (!isEditing)
+                SliverToBoxAdapter(
+                  child: Row(
+                    children: [
+                      Container(
                         margin: const EdgeInsets.only(left: 15),
-                        width: 70,
-                        padding: const EdgeInsets.all(5),
+                        width: 60,
+                        padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                           color: const Color(0xFF172e3d),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              selectedPriceFilter,
-                              style: const TextStyle(color: defaultTextColor),
-                            ),
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: iconColor,
-                            ),
-                          ],
+                        child: const Text(
+                          'Grafik',
+                          style: TextStyle(color: defaultTextColor),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showPriceFilterBottomSheet(
-                          context,
-                          'Fiyat Değişimi',
-                          priceTimeStampFilterList,
-                          selectedPriceTimeStampFilter,
-                          (selected) {
-                            setState(() {
-                              selectedPriceTimeStampFilter = selected;
-                            });
-                          },
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 15),
-                        width: 90,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF172e3d),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              selectedPriceTimeStampFilter,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              color: iconColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showPriceFilterBottomSheet(
-                          context,
-                          'Sıralama',
-                          orderFilterList,
-                          selectedOrderFilter,
-                          (selected) {
-                            setState(() {
-                              selectedOrderFilter = selected;
-                              orderIcon = updateOrderIcon(selectedOrderFilter);
-                            });
-                          },
-                          showIcons: true,
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 15),
-                        width: 110,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF172e3d),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              getOrderText(selectedOrderFilter),
-                              style: const TextStyle(color: defaultTextColor),
-                            ),
-                            Icon(
-                              orderIcon ?? Icons.sort,
-                              color: iconColor,
-                            ),
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          showPriceFilterBottomSheet(
+                            context,
+                            'Değer',
+                            priceFilterList,
+                            selectedPriceFilter,
+                            (selected) {
+                              setState(() {
+                                selectedPriceFilter = selected;
+                              });
+                            },
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 15),
+                          width: 70,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF172e3d),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                selectedPriceFilter,
+                                style: const TextStyle(color: defaultTextColor),
+                              ),
+                              const Icon(
+                                Icons.arrow_drop_down_outlined,
+                                color: iconColor,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () {
+                          showPriceFilterBottomSheet(
+                            context,
+                            'Fiyat Değişimi',
+                            priceTimeStampFilterList,
+                            selectedPriceTimeStampFilter,
+                            (selected) {
+                              setState(() {
+                                selectedPriceTimeStampFilter = selected;
+                              });
+                            },
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 15),
+                          width: 90,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF172e3d),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                selectedPriceTimeStampFilter,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              const Icon(
+                                Icons.arrow_drop_down_outlined,
+                                color: iconColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          showPriceFilterBottomSheet(
+                            context,
+                            'Sıralama',
+                            orderFilterList,
+                            selectedOrderFilter,
+                            (selected) {
+                              setState(() {
+                                selectedOrderFilter = selected;
+                                orderIcon =
+                                    updateOrderIcon(selectedOrderFilter);
+                              });
+                            },
+                            showIcons: true,
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 15),
+                          width: 110,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF172e3d),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                getOrderText(selectedOrderFilter),
+                                style: const TextStyle(color: defaultTextColor),
+                              ),
+                              Icon(
+                                orderIcon ?? Icons.sort,
+                                color: iconColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
               BlocBuilder<HomeCurrencyListCubit, HomeCurrencyListState>(
                 builder: (context, state) {
                   editableCurrencyList = state.homeCurrencyList
                       .where((currency) => currency.isSelected)
                       .toList();
-                  return SliverList(
+                  return SliverReorderableList(
+                    itemBuilder: (context, index) {
+                      final currency = editableCurrencyList[index];
+                      return Column(
+                        key: ValueKey(
+                          currency.currencyName,
+                        ),
+                        children: [
+                          ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 16),
+                            leading: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (isEditing)
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.close,
+                                      color: systemGreyColor,
+                                    ),
+                                    onPressed: () {
+                                      context
+                                          .read<HomeCurrencyListCubit>()
+                                          .hideCurrency(currency);
+                                    },
+                                  ),
+                                /*ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(
+                                    currency.currencyImage,
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),*/
+                              ],
+                            ),
+                            title: isEditing
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        currency.currencySymbolName,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Text(
+                                        currency.currencyName,
+                                        style: const TextStyle(
+                                          color: systemGreyColor,
+                                          fontSize: 14,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  )
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            currency.currencySymbolName,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    10 *
+                                                    3.5,
+                                                child: Text(
+                                                  currency.currencyName,
+                                                  style: const TextStyle(
+                                                    color: systemGreyColor,
+                                                    fontSize: 14,
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              const Text(
+                                                ' . 09.33',
+                                                style: TextStyle(
+                                                  color: systemGreyColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                10 *
+                                                1.5,
+                                            child: Text(
+                                              currency.sellPrice.toString(),
+                                              style: const TextStyle(
+                                                color: defaultTextColor,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 18,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                currency.buyPrice.toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.green,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 7),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    10 *
+                                                    1,
+                                                child: Text(
+                                                  '%${currency.sellPrice}',
+                                                  style: const TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 12,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                            trailing: isEditing
+                                ? const Icon(
+                                    Icons.menu,
+                                    color: iconColor,
+                                  )
+                                : null,
+                          ),
+                          const Divider(
+                            color: systemGreyColor,
+                            thickness: 0.5,
+                            indent: 15,
+                            endIndent: 15,
+                          ),
+                        ],
+                      );
+                    },
+                    itemCount: editableCurrencyList.length,
+                    onReorder: (oldIndex, newIndex) {
+                      context
+                          .read<HomeCurrencyListCubit>()
+                          .reorderCurrencies(oldIndex, newIndex);
+                    },
+                  );
+
+                  /*return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        // Yeni Bloc için liste öğeleri
                         return Column(
                           children: [
                             ListTile(
@@ -560,7 +765,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       childCount: editableCurrencyList.length,
                     ),
-                  );
+                  );*/
                 },
               ),
               /*SliverList(
@@ -667,31 +872,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),*/
-              if (state.visibleLists[0])
+              if (state.visibleLists[0] && !isEditing)
                 _RisingExchangesOfDay(
                   risingExchangesOfDayList: risingExchangesOfDayList,
                 ),
-              if (state.visibleLists[1])
+              if (state.visibleLists[1] && !isEditing)
                 _RisingExchangesOfWeek(
                   risingExchangesOfWeekList: risingExchangesOfWeekList,
                 ),
-              if (state.visibleLists[2])
+              if (state.visibleLists[2] && !isEditing)
                 _MostSavedCrpytoListOfDay(
                   mostSavedCryptoList: mostSavedCryptoList,
                 ),
-              if (state.visibleLists[3])
+              if (state.visibleLists[3] && !isEditing)
                 _RisingCryptoListOfWeek(cryptoList: cryptoList),
-              if (state.visibleLists[4])
+              if (state.visibleLists[4] && !isEditing)
                 _MostActiveCryptoListOfDay(
                   mostActiveCryptoList: mostActiveCryptoList,
                 ),
-              if (state.visibleLists[5])
+              if (state.visibleLists[5] && !isEditing)
                 _RisingShareListOfWeek(shareList: shareList),
-              if (state.visibleLists[6])
+              if (state.visibleLists[6] && !isEditing)
                 _MostActiveShareListOfDay(
                   mostActiveShareList: mostActiveShareList,
                 ),
-              if (state.visibleLists[7])
+              if (state.visibleLists[7] && !isEditing)
                 _MostFollowedMoneyList(
                   mostFollowedMoneys: mostFollowedMoneys,
                 ),
